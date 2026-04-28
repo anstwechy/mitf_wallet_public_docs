@@ -1,71 +1,81 @@
 # Executive & business overview {: .wallet-lead }
 
-**Audience:** CEOs, general managers, business owners, product and partnership leads at **Masarat**.
+**Who this is for:** chief executives, general managers, **commercial and product** leaders, and partnership owners at **Masarat**.
 
-This page explains **why the MITF Wallet platform matters commercially** and **which capabilities are “market real”** today — aligned with the shipped codebase, not roadmap slides.
-
----
-
-## The product in plain language
-
-Masarat Wallet is a **multi-tenant wallet platform** a bank or regulated institution can put **behind its mobile apps and partner APIs**. It covers:
-
-- **Onboarding** — register customers and issue wallets (resident / foreign patterns, classifications, employer-linked models where configured).
-- **Day‑to‑day money** — **P2P transfers**, **wallet funding**, **merchant payments**, **cash withdrawal** journeys, **pooled accounts** for corporate or treasury-style use cases.
-- **Corrections** — **full and partial reversals** with fee policy, designed for operational reality, not only happy paths.
-- **Ledger truth** — every material movement can be tied to **double-entry** journals with **idempotency** so retries do not create duplicate money.
+**What this page does:** explains **what Masarat Wallet is as a product**, **why a bank or partner would care**, and **what is real in the product today** — without implementation jargon.
 
 ---
 
-## Differentiators you can cite (fact-checked to engineering)
+## The product in everyday language
 
-| Capability | Why a bank cares |
-| ---------- | ---------------- |
-| **Gateway-first mobile path** | **Customer Gateway** packages Users + Wallets + Transactions behind **REST**, **JWT** (when enabled), and **per-application API keys** — a practical model for multiple bank apps and personas. |
-| **PIN and step-up for debits** | Wallet **PIN** plus **short-lived transaction authorization tokens** for gated debit operations reduce “who moved the money?” ambiguity without blocking all reads on a hot path. |
-| **Institution-scoped context** | Bank context flows as **`x-bank-id`** on transaction-side gRPC — a direct fit for **multi-bank** platform deployments. |
-| **AML monitoring without blocking payments** | **`Masarat.AmlBridge`** consumes **domain completion events** and publishes to the **FlowGuard** topic contract — **decoupled** from `PostJournal` latency (see [AML integration](../integrations/aml-integration.md)). |
-| **Evidence of scale** | **Masarat.LoadTest.Job** drives **gRPC** and **gateway** journeys; published summaries show **tens to ~150 sustained ops/sec** class results in lab conditions — useful for **internal** capacity storytelling ([summary](../load-testing/stakeholder-load-test-summary.md)). |
+Masarat Wallet is a **white-label style wallet platform**: a regulated institution can put its **brand and apps** on top and offer customers **digital accounts** and **payments** in one controlled system.
+
+**Customers can typically:**
+
+- **Join** — register and get a wallet (including different customer types and programmes you configure).  
+- **Move money** — send to other wallets, add funds, pay merchants, take cash out, and use **shared or corporate-style** wallet setups where you need them.  
+- **Fix mistakes** — **reverse** or partially reverse payments where your rules allow it, including how **fees** are handled.
+
+**The institution gets:**
+
+- One **trusted ledger** so finance and operations are not arguing about “which screen is right.”  
+- A path to hook **AML monitoring** (FlowGuard) **after** payments, so compliance improves without blocking each tap.  
+- A foundation to **grow** — multiple bank programmes, apps, and limits can be managed in a structured way.
 
 ---
 
-## What institutions can roll out with this stack
+## Why it stands out (business view)
+
+| Topic | Why it matters to a bank or partner |
+| ----- | ----------------------------------- |
+| **Built for mobile and partners** | There is a dedicated **API layer** for apps: separate credentials per application, optional customer login, and **traffic limits** so one channel cannot overwhelm the platform. |
+| **Strong customer checks for spending** | Where you enable it, customers use a **wallet PIN** and a **short-lived approval** for debits — clearer accountability for “who authorised this payment.” |
+| **Multi-bank ready** | The design supports **more than one bank** on the same technology with clear **separation by institution**. |
+| **AML without slowing the sale** | Monitoring data is sent to **FlowGuard** in the background after successful movements — so **screening does not sit in the critical path** of posting money. |
+| **Evidence of throughput** | Internal test campaigns show **strong sustained payment rates** in a lab setup — useful for **capacity conversations** with stakeholders ([short summary](../load-testing/stakeholder-load-test-summary.md)). |
+
+??? tip "For technical teams"
+    Implementation detail (gateway, tokens, bank identifiers, bridge service names) is in [AML integration](../integrations/aml-integration.md) and the [technical home](../README.md).
+
+---
+
+## Where it fits in your proposition
 
 ```mermaid
 flowchart LR
-  subgraph retail["Retail and consumer"]
-    A[Wallet app]
-    B[P2P pay merchant cash out]
+  subgraph retail["Retail customers"]
+    A[Wallet in the bank app]
+    B[Pay people pay shops get cash]
   end
 
-  subgraph corporate["Corporate and treasury-style"]
-    C[Pooled accounts]
-    D[Controlled funding sweeps]
+  subgraph corporate["Business and treasury"]
+    C[Pooled or shared balances]
+    D[Controlled funding]
   end
 
-  subgraph governance["Governance"]
-    E[Per-app keys and rate limits]
-    F[KYC service boundary]
-    G[Reconciliation exports]
+  subgraph trust["Trust and control"]
+    E[Per-app access and limits]
+    F[Identity checks where you deploy them]
+    G[Reports that line up with the ledger]
   end
 
   A --> B
   C --> D
-  retail --> governance
-  corporate --> governance
+  retail --> trust
+  corporate --> trust
 ```
 
 ---
 
-## Dependencies and honesty
+## Straight talk
 
-- **Production outcomes** depend on **your** infra, network, DR posture, and operational maturity — the platform gives **mechanisms** (outbox, backpressure, observability), not a guarantee without runbooks.
-- **FlowGuard** semantics and alert handling live in the **AML product**; the wallet integration supplies **timely, structured monitoring traffic** aligned with the AML contract.
+- **Go-live success** still depends on **your** infrastructure, processes, and people. The platform supplies **proven patterns** (controls, monitoring, recovery) — not a substitute for a runbook or a risk sign-off.  
+- **FlowGuard** decides **what happens to alerts and cases**. The wallet’s job is to deliver **complete, consistent monitoring data** on time.
 
 ---
 
-## Where to go next
+## Read next
 
-- **Risk, compliance, finance:** [Risk, compliance & finance](risk-compliance-and-finance.md)  
-- **Operational and technology depth:** [Operations & technology leadership](operations-and-technology.md)  
-- **Technical deep dive:** [Platform capabilities](../architecture/platform-capabilities.md)
+- **Risk, compliance, and finance** — [Risk, compliance & finance](risk-compliance-and-finance.md)  
+- **How we run and scale it** — [Operations & technology leadership](operations-and-technology.md)  
+- **Deep technical picture** — [Platform capabilities](../architecture/platform-capabilities.md)

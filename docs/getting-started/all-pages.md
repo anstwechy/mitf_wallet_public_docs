@@ -6,10 +6,10 @@ Use the **sidebar** for the recommended order. This page is a **flat lookup** by
 
 | Page | Description |
 | ---- | ----------- |
-| [Executive & business overview](../stakeholders/executive-overview.md) | Business and strategy framing for Masarat leadership |
+| [Executive & business overview](../stakeholders/executive-overview.md) | Commercial product story for Masarat leaders (non-technical) |
 | [Operations & technology (leadership)](../stakeholders/operations-and-technology.md) | COO/CIO/SRE-oriented topology and operability |
-| [Platform at a glance (stakeholders)](../stakeholders/index.md) | Leadership entry: powers, map, proof points |
-| [Risk, compliance & finance (leadership)](../stakeholders/risk-compliance-and-finance.md) | Control, AML, reconciliation themes for heads of risk/finance |
+| [Platform at a glance (stakeholders)](../stakeholders/index.md) | Leadership entry — outcomes and simple map (non-technical) |
+| [Risk, compliance & finance (leadership)](../stakeholders/risk-compliance-and-finance.md) | Control themes for risk, AML, audit, finance (non-technical) |
 
 ---
 

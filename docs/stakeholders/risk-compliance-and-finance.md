@@ -1,74 +1,79 @@
 # Risk, compliance & finance {: .wallet-lead }
 
-**Audience:** Chief Risk Officer, compliance, internal audit, AML operations, **and finance / treasury control** leaders at **Masarat**.
+**Who this is for:** risk, compliance, **AML**, internal audit, and **finance / treasury** leaders at **Masarat**.
 
-This page connects **control themes** to **implemented mechanisms** in the wallet platform (ledger, messaging, security, reconciliation, AML handoff).
-
----
-
-## Financial control — ledger and idempotency
-
-| Control | Platform behaviour |
-| ------- | ------------------- |
-| **Double-entry integrity** | **`PostJournal`** enforces **balanced** legs; ledger returns explicit **submission outcomes** so engineers do not guess whether to retry. |
-| **Idempotent money posts** | **Idempotency keys** on ledger entries; duplicate responses are treated as **recovery signals**, not silent second posts. |
-| **Separation of “available” vs ledger** | Under async load, **available** wallet projections can lag **ledger** truth briefly; **reconciliation and consistency** guidance favour **ledger-aligned** checks ([runbook](../operations/reconciliation-and-consistency-runbook.md)). |
+**What this page does:** explains **how the wallet supports control and oversight** — in language suitable for committees and steering groups. Technical contracts and runbooks are linked at the end of sections for specialists.
 
 ---
 
-## Operational risk — durability and ambiguous outcomes
+## Financial integrity
 
-**Transactional outbox (PostgreSQL)** on **Wallets** and **Transactions** means: *if the business transaction commits, the intent to publish is durable too* — reducing “we took the money in DB but never told the bus” failure modes.
+| Topic | What it means for you |
+| ----- | ---------------------- |
+| **Single source of truth for money** | Customer balances and bank movements roll up to a **central ledger** built on **double-entry** rules (every movement has a matching counter-entry). That is the right anchor for finance and audit. |
+| **No “accidental twice”** | The platform is designed so **network retries** or **duplicate submissions** do not create a **second payment by mistake** — important for fraud and customer trust. |
+| **Screen vs ledger** | Under heavy load, what a user sees as “available” can momentarily differ from the **final ledger** position. **Operational checks** should follow **ledger-based** guidance where precision matters ([runbook](../operations/reconciliation-and-consistency-runbook.md)). |
 
-For **ledger RPC** calls that are **outside** the local DB transaction, the platform admits **ambiguous outcomes** (`Unknown`) and relies on **reconciliation ownership** — see the explicit contract:
+??? tip "For technical teams — ledger and idempotency"
+    Detailed behaviour (journal posting, idempotency keys, outcomes) is in [Platform capabilities](../architecture/platform-capabilities.md) and [transaction examples](../architecture/transaction-flows-and-ledger-examples.md).
 
-- [Outbox & ledger consistency](../architecture/outbox-and-ledger-consistency.md)
+---
+
+## Operational resilience (plain English)
+
+**After we save a payment, we don’t rely on “hope” to notify other systems.** The design ensures that **instructions to notify** are stored in the **same breath** as the payment where the product requires it — so you avoid “money moved in the database but nobody was told.”
+
+**Sometimes the link to the ledger is temporarily unclear** (timeouts, outages). The platform does not pretend those cases are always black-and-white: there are **defined ownership and recovery paths** so operations and engineering know **who fixes what**.
 
 ```mermaid
 flowchart TD
-  A[Local DB commit + outbox] --> B[At-least-once to broker]
-  B --> C[Idempotent consumers]
-  D[Ledger gRPC] --> E{Definitive outcome?}
-  E -->|Yes| F[Complete flow]
-  E -->|Timeout / unknown| G[Reconciliation path]
+  A[Payment saved in the service] --> B[Notifications queued reliably]
+  B --> C[Downstream steps handle repeats safely]
+  D[Call to central ledger] --> E{Clear yes or no?}
+  E -->|Yes| F[Complete as normal]
+  E -->|Unclear| G[Escalate to reconciliation playbook]
 ```
+
+??? tip "For technical teams"
+    Full delivery semantics and recovery tables: [Outbox & ledger consistency](../architecture/outbox-and-ledger-consistency.md).
 
 ---
 
 ## AML and monitoring (FlowGuard)
 
-- **Masarat.AmlBridge** maps **wallet completion events** (e.g. transfer, fund, merchant, cash, reversal) to FlowGuard’s **transaction queue message** and publishes on **`aml.transactions`** with **`transaction.{BankCode}`** routing keys.
-- **Tenant resolution** for `BankId` → `BankCode` is **deterministic** from Transactions + Wallets data; failures **do not publish** (logged) — see [AML bridge — tenant resolution](../integrations/aml-bridge-tenant-resolution.md).
-- **Normative integration plan:** [FlowGuard wallet / AML](../integrations/flowguard-wallet-aml.md).
+- **When** a wallet movement **completes successfully**, the platform can publish a **standard message** for **FlowGuard** to analyse — **after** the payment path, not blocking the customer at the till.  
+- **Which bank** the event belongs to is **worked out from your data**; if it cannot be resolved, the event is **not sent** and is **logged** for investigation — see [AML bridge — tenant resolution](../integrations/aml-bridge-tenant-resolution.md) for specialists.  
+- **End-to-end programme** (message shapes, phases, responsibilities): [FlowGuard wallet / AML plan](../integrations/flowguard-wallet-aml.md).
 
-!!! note "Scope boundary"
-    This **phase** is **post-commit monitoring** — not blocking ledger posts on AML scores. Product decisions on holds/blocks remain **bank and AML programme** owned.
-
----
-
-## KYC boundary
-
-The solution includes **Masarat.Kyc.Api** as a **dedicated service** in the compose topology — suitable for **identity verification workflows** alongside wallet onboarding (configuration and jurisdictional rules are deployment-specific).
+!!! note "Product boundary today"
+    This integration is **monitoring after the fact**, not “block the payment until AML clears.” Any **hold funds / block account** product is a **bank and programme** decision on top.
 
 ---
 
-## Bank reconciliation
+## Identity (KYC)
 
-**Masarat.Reconciliation.Job** exports ledger entries for **bank statement alignment**; **Reporting** surfaces operational outputs. Finance teams should pair:
-
-- [Financial operations & reconciliation](../reconciliation/financial-operations-and-reconciliation.md) (business narrative)  
-- [Reconciliation job](../reconciliation/reconciliation.md) (mechanics)
+The platform includes a **dedicated identity service area** so **know-your-customer** steps can sit alongside onboarding **where you configure it**. **Local law and your policy** still drive what you must collect and when.
 
 ---
 
-## Security artefacts for your programmes
+## Reconciliation with the bank
 
-- [System hardening](../security/system-hardening.md) — API keys, PINs, tokens, logging redaction.  
-- [Onboarding channel hardening](../security/onboarding-channel-hardening.md) — onboarding-specific controls.
+Scheduled jobs and reporting help **export ledger activity** and **support matching to bank statements** — the operational side of “does our book match the bank’s?” Pair:
+
+- [Financial operations & reconciliation](../reconciliation/financial-operations-and-reconciliation.md) — business narrative  
+- [Reconciliation job](../reconciliation/reconciliation.md) — how the job fits in  
 
 ---
 
-## Next
+## Security (for your security and audit colleagues)
 
-- **Business framing:** [Executive overview](executive-overview.md)  
-- **Production posture:** [Operations &amp; technology](operations-and-technology.md)
+- [System hardening](../security/system-hardening.md) — keys, PINs, tokens, and safe logging.  
+- [Onboarding channel hardening](../security/onboarding-channel-hardening.md) — extra focus on the signup path.
+
+---
+
+## Read next
+
+- **Commercial story** — [Executive overview](executive-overview.md)  
+- **Operations and technology** — [Operations & technology leadership](operations-and-technology.md)  
+- **Leadership hub** — [Platform at a glance](index.md)

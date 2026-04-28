@@ -1,99 +1,80 @@
 # Masarat MITF Wallet — platform at a glance {: .wallet-lead }
 
-**Masarat Wallet** (MITF) is Masarat’s bank-grade **digital wallet and ledger** platform: onboarding, wallets, regulated money movement, merchant and cash journeys, pooled accounts, reversals, **double-entry ledger** correctness, and **asynchronous** scale — all built as **.NET 10 microservices** with clear boundaries for **audit, compliance, and growth**.
+**Masarat Wallet** is the platform Masarat uses to power **digital wallets** for banks and regulated partners: customers get onboarded, hold balances, pay each other, pay merchants, withdraw cash, and use pooled or treasury-style accounts when needed — with a **single official ledger** so money and reporting stay trustworthy.
 
-This page is the **front door for Masarat leadership** (executives, department heads, and senior managers). The technical deep dives stay in the rest of this site; here we focus on **what the system does**, **why it matters**, and **where to go next**.
-
----
-
-## What you can tell stakeholders in one minute
-
-| Theme | Masarat Wallet delivers |
-| ----- | ------------------------ |
-| **Money correctness** | Atomic **PostJournal** with **zero-sum** double-entry, idempotent ledger posts, explicit outcomes for retries and reconciliation. |
-| **Bank-ready channels** | **Customer Gateway** for mobile apps: REST, **per-app credentials**, optional **JWT**, persona routing, and rate limiting — on top of gRPC core services. |
-| **Durability** | **Transactional outbox** (PostgreSQL) on **Wallets** and **Transactions** so money-adjacent events are not “fire-and-forget”. |
-| **Scale (lab-proven)** | Internal load campaigns show **sustained tens to ~150 wallet operations/sec** in Docker reference stacks, with **idempotency honoured under chaos** and **ledger-aligned checks** (see [load test summary](../load-testing/stakeholder-load-test-summary.md)). |
-| **Compliance path** | **Masarat.AmlBridge** publishes completion traffic toward **FlowGuard** over **RabbitMQ** without blocking core payment paths. |
-| **Operability** | OpenTelemetry → **Prometheus / Loki / Tempo / Grafana**; structured logs; reconciliation **job and reporting** for bank-vs-ledger alignment. |
-
-!!! success "Code-backed, not slide-only"
-    Capabilities here map to **`Masarat.Wallet.slnx`**, **`docker-compose.yml`**, and the main **`README`** in Masarat’s internal **`mitf_wallet`** engineering repository — the same source tree used to build **Ledger**, **Wallets**, **Users**, **Transactions**, **Customer Gateway**, **Gateway Management Web**, **KYC API**, **AML Bridge**, **Reconciliation** (API, job, reporting), **LoadTest.Job**, messaging contracts, and observability libraries.
+This page is written for **leaders and business owners** at Masarat. It stays high level. Engineers will find APIs, architecture, and runbooks elsewhere on this site.
 
 ---
 
-## System map (who does what)
+## In one minute: what leadership should know
+
+| What matters | In plain terms |
+| ------------ | -------------- |
+| **Correct money** | Movements are recorded in a proper accounting-style ledger so debits and credits stay balanced. The system is built so repeated or retried requests do not silently create **double payments**. |
+| **Ready for bank apps** | There is a **front door** designed for mobile and partner channels: secure access per app, optional login for end users, and controls on how fast clients can call the platform. |
+| **Reliable messaging** | When a payment is saved, related notifications (for other parts of the platform) are **not left to chance** — they are designed to go out reliably after the payment is committed. |
+| **Capacity (internal tests)** | In Masarat’s **internal lab** tests, the stack sustained **roughly tens to low hundreds of wallet payments per second**, including stressful **fault-injection** runs. Figures are for **planning and confidence**, not a customer contract — see the [short summary for stakeholders](../load-testing/stakeholder-load-test-summary.md). |
+| **Compliance monitoring** | After money movements complete, the platform can send **standardised monitoring data** to **FlowGuard** (Masarat’s AML side) **without blocking** the payment itself. |
+| **Run the bank** | Teams get **dashboards and logs** for operations, plus **reconciliation** tools to compare the ledger with bank statements. |
+
+??? tip "For technical teams — map to the codebase"
+    The behaviour above is implemented in Masarat’s internal **mitf_wallet** repository (services such as **Customer Gateway**, **Users**, **Wallets**, **Transactions**, **Ledger**, **AML bridge**, **reconciliation**, **KYC**, and observability). Use the [technical home](../README.md) for service names and configuration detail.
+
+---
+
+## How the pieces fit together (simple view)
 
 ```mermaid
 flowchart TB
-  subgraph experience["Customer & bank channels"]
-    GW[Customer Gateway REST]
-    MWEB[Gateway Management Web]
+  subgraph channels["What customers and banks touch"]
+    Apps[Mobile and partner apps]
+    Mgmt[Admin / management web]
   end
 
-  subgraph core["Core money domain"]
-    U[Users — onboarding]
-    W[Wallets — accounts PIN classifications]
-    T[Transactions — transfers merchant cash pool reverse]
-    L[Ledger — journals balances]
+  subgraph core["Core platform"]
+    Join[Sign-up and customer records]
+    Wallets[Wallets balances and rules]
+    Pay[Payments transfers merchants cash]
+    Books[Official ledger]
   end
 
-  subgraph assurance["Assurance & growth"]
-    KYC[KYC API]
-    AML[AML Bridge → FlowGuard]
-    REC[Reconciliation API Job Reporting]
-    LT[LoadTest.Job]
+  subgraph assurance["Assurance"]
+    Identity[Know-your-customer support]
+    AMLfeed[AML monitoring feed to FlowGuard]
+    Recon[Bank reconciliation and reporting]
   end
 
-  subgraph platform["Platform"]
-    PG[(PostgreSQL)]
-    RMQ[RabbitMQ]
-    OBS[OTel Grafana stack]
-  end
-
-  GW --> U
-  GW --> W
-  GW --> T
-  U --> W
-  W --> L
-  T --> L
-  W --> RMQ
-  T --> RMQ
-  AML --> RMQ
-  W --> PG
-  T --> PG
-  U --> PG
-  L --> PG
-  REC --> L
-  GW -.-> OBS
+  Apps --> Join
+  Apps --> Wallets
+  Apps --> Pay
+  Join --> Wallets
+  Wallets --> Books
+  Pay --> Books
+  Pay --> AMLfeed
+  Books --> Recon
+  Identity --> Join
 ```
 
 ---
 
-## Guided reads by role
+## Who should read which page
 
-| If you lead… | Start with |
-| -------------- | ---------- |
-| **Business, strategy, or a P&L** | [Executive & business overview](executive-overview.md) |
-| **Risk, compliance, AML, or finance control** | [Risk, compliance & finance](risk-compliance-and-finance.md) |
-| **Operations, IT, engineering, or delivery** | [Operations & technology leadership](operations-and-technology.md) |
-| **Deep technical work** | [Home — technical hub](../README.md) → Architecture / Reference |
-
----
-
-## Proof points (non-contractual)
-
-From Masarat’s **internal Docker reference** campaigns (engineering baselines, March 2026 class of runs — see [stakeholder load test summary](../load-testing/stakeholder-load-test-summary.md)):
-
-- **~146 ops/s** sustained on a **10k clean** transfer phase; **~89 ops/s** under a **chaos** overlay with **ReplayMismatches = 0**.
-- **Million-transfer** campaigns completed with **ledger-aligned money checks**; chaos runs show controlled degradation, not silent duplication.
-
-Production figures depend on hardware, regions, and configuration — treat these as **internal engineering evidence**, not customer SLAs.
+| If you… | Go here |
+| ------- | ------- |
+| **Own strategy, commercial, or the business case** | [Executive & business overview](executive-overview.md) |
+| **Own risk, compliance, AML, audit, or finance control** | [Risk, compliance & finance](risk-compliance-and-finance.md) |
+| **Own IT delivery, infrastructure, or day-to-day operations** | [Operations & technology leadership](operations-and-technology.md) |
+| **Need APIs, diagrams, and implementation detail** | [Technical documentation home](../README.md) |
 
 ---
 
-## Next steps inside Masarat
+## Proof points (internal lab — not an SLA)
 
-1. **Pick your stakeholder track** in the table above.  
-2. Share **this stakeholder hub** as the single entry URL for leadership.  
-3. Point product and integration teams to the [technical home](../README.md) for APIs and runbooks.
+Masarat has run **large-scale internal tests** (including deliberate failures and duplicates) to stress the platform. Bottom line: the system **completed planned volumes**, **handled retries predictably**, and **checked balances against the ledger**. Numbers and caveats are in the [stakeholder load test summary](../load-testing/stakeholder-load-test-summary.md). **Production** performance always depends on your environment.
+
+---
+
+## Inside Masarat
+
+1. Bookmark **this page** as the leadership entry to the docs.  
+2. Send **product and delivery** teams to the [technical home](../README.md) when they need specifications.
