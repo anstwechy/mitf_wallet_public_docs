@@ -18,7 +18,7 @@ We document because **integrators, auditors, risk, and our own teams** deserve t
 
 ## The team behind the platform
 
-**MITF Wallet was built by Masarat’s development team** — the engineers who design, implement, and run the **mitf_wallet** stack end to end.
+**MITF Wallet was built by Masarat’s development team** — the engineers who design and implement the **mitf_wallet** system end to end.
 
 ---
 
