@@ -22,21 +22,23 @@ This document defines the phase-1 consistency model for wallet, transaction, and
 ```mermaid
 sequenceDiagram
   autonumber
-  participant App as "Service handler"
-  participant DB as PostgreSQL
-  participant OB as "Outbox dispatcher"
-  participant Q as RabbitMQ
-  participant C as Consumer
+  participant App
+  participant DB
+  participant OB
+  participant Q
+  participant C
 
   App->>DB: "BEGIN; business rows + outbox rows"
   App->>DB: COMMIT
   OB->>DB: Read undispatched outbox
   OB->>Q: Publish message
   OB->>DB: Mark dispatched
-  Q->>C: Deliver (at-least-once)
+  Q->>C: "Deliver (at-least-once)"
   C->>C: Inbox + domain idempotency
   C->>DB: Apply side-effects once
 ```
+
+> **Lifelines:** **App** = service handler, **DB** = PostgreSQL, **OB** = outbox dispatcher, **Q** = broker (e.g. RabbitMQ), **C** = consumer.
 
 ## Ledger RPC outside the local DB transaction (why `Unknown` exists)
 
