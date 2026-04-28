@@ -1,6 +1,19 @@
-# Full A–Z page index
+# Full site index
 
-Every published page in this site, alphabetically by title. Use the sidebar for the **curated** order; use this list when you know a keyword and want a flat lookup.
+Use the **sidebar** for the recommended order. This page is a **flat lookup** by title.
+
+## Masarat leadership
+
+| Page | Description |
+| ---- | ----------- |
+| [Executive & business overview](../stakeholders/executive-overview.md) | Business and strategy framing for Masarat leadership |
+| [Operations & technology (leadership)](../stakeholders/operations-and-technology.md) | COO/CIO/SRE-oriented topology and operability |
+| [Platform at a glance (stakeholders)](../stakeholders/index.md) | Leadership entry: powers, map, proof points |
+| [Risk, compliance & finance (leadership)](../stakeholders/risk-compliance-and-finance.md) | Control, AML, reconciliation themes for heads of risk/finance |
+
+---
+
+## All other pages (A–Z by title)
 
 | Page | Description |
 | ---- | ----------- |

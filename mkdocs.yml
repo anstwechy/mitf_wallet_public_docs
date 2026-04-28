@@ -25,8 +25,15 @@ validation:
 exclude_docs: |
   /site/**
 
+# Nav order: leadership first, then onboarding, deep architecture, assurance layers,
+# integrations, evidence (load tests), encyclopedic reference last.
 nav:
-  - "Home": README.md
+  - "Home (technical hub)": README.md
+  - "For Masarat leadership":
+      - "Platform at a glance": stakeholders/index.md
+      - "Executive & business overview": stakeholders/executive-overview.md
+      - "Risk, compliance & finance": stakeholders/risk-compliance-and-finance.md
+      - "Operations & technology": stakeholders/operations-and-technology.md
   - Getting started:
       - Welcome & guided tours: getting-started/welcome.md
       - Full A–Z index: getting-started/all-pages.md
@@ -36,11 +43,24 @@ nav:
       - Transaction flows & ledger examples: architecture/transaction-flows-and-ledger-examples.md
       - Transfer backpressure (client contract): architecture/transfer-backpressure-client-contract.md
       - Outbox & ledger consistency: architecture/outbox-and-ledger-consistency.md
+  - Security:
+      - System hardening: security/system-hardening.md
+      - Onboarding channel hardening: security/onboarding-channel-hardening.md
   - Operations:
       - Production deployment: operations/production-deployment.md
       - Logging: operations/logging.md
       - Load testing operations: operations/load-testing-operations.md
       - Reconciliation & consistency runbook: operations/reconciliation-and-consistency-runbook.md
+  - Reconciliation:
+      - Financial operations: reconciliation/financial-operations-and-reconciliation.md
+      - Reconciliation job: reconciliation/reconciliation.md
+  - Integrations:
+      - AML integration (overview): integrations/aml-integration.md
+      - FlowGuard wallet / AML plan: integrations/flowguard-wallet-aml.md
+      - AML bridge — tenant resolution: integrations/aml-bridge-tenant-resolution.md
+  - Load testing:
+      - Stakeholder summary: load-testing/stakeholder-load-test-summary.md
+      - Reference runs: load-testing/load-test-reference-runs.md
   - Reference:
       - API reference: reference/api.md
       - gRPC services: reference/grpc-services.md
@@ -58,19 +78,6 @@ nav:
           - Users API: reference/service-reference/Masarat.Users.Api.reference.md
           - Wallets API: reference/service-reference/Masarat.Wallets.Api.reference.md
           - Webhooks API: reference/service-reference/Masarat.Webhooks.Api.reference.md
-  - Security:
-      - System hardening: security/system-hardening.md
-      - Onboarding channel hardening: security/onboarding-channel-hardening.md
-  - Reconciliation:
-      - Financial operations: reconciliation/financial-operations-and-reconciliation.md
-      - Reconciliation job: reconciliation/reconciliation.md
-  - Load testing:
-      - Reference runs: load-testing/load-test-reference-runs.md
-      - Stakeholder summary: load-testing/stakeholder-load-test-summary.md
-  - Integrations:
-      - AML integration (overview): integrations/aml-integration.md
-      - FlowGuard wallet / AML plan: integrations/flowguard-wallet-aml.md
-      - AML bridge — tenant resolution: integrations/aml-bridge-tenant-resolution.md
 
 theme:
   name: material
@@ -82,7 +89,6 @@ theme:
     text: Inter
     code: Fira Code
   palette:
-    # Dark first — forest chrome + mint (different from FlowGuard slate/grey/amber)
     - scheme: slate
       primary: teal
       accent: deep orange

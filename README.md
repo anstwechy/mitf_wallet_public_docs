@@ -23,4 +23,4 @@ Pushes to `main` run [`.github/workflows/pages.yml`](.github/workflows/pages.yml
 1. In the GitHub repo: **Settings → Pages → Build and deployment → Source:** choose **GitHub Actions**.
 2. Merge to `main`; the workflow uploads the `site/` output and publishes it.
 
-Markdown sources live under [`docs/`](docs/).
+Markdown sources live under [`docs/`](docs/). **Masarat leadership** content lives under [`docs/stakeholders/`](docs/stakeholders/) (executive, risk/finance, and operations/technology tracks).

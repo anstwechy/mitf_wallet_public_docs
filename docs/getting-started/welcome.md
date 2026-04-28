@@ -3,7 +3,7 @@
 Pick your lane below, then follow the **reading order** so nothing depends on missing context.
 
 !!! tip "New here?"
-    Start with [Home](../README.md) for a one-screen map, then come back to the path that matches your role.
+    **Masarat leadership:** start with [Stakeholder hub](../stakeholders/index.md). **Engineers:** use [Home](../README.md), then pick a path below.
 
 ---
 
@@ -54,17 +54,34 @@ Folders are **topic-based** (not alphabet soup):
 
 ```mermaid
 flowchart TB
-  GS[getting-started/] --> H[Home README]
-  GS --> W[welcome.md — you are here]
-  GS --> AZ[all-pages.md — full index]
+  subgraph lead["Masarat leadership"]
+    ST[stakeholders/]
+  end
 
-  A[architecture/] --> AC[Capabilities & contracts]
-  O[operations/] --> OR[Deploy, logs, load, runbooks]
-  R[reference/] --> RR[API, gRPC, config, service-reference/]
-  S[security/] --> SH[Hardening]
-  RC[reconciliation/] --> RF[Finance + job]
-  L[load-testing/] --> LT[Runs + summaries]
-  I[integrations/] --> IL[AML + FlowGuard + tenant resolution]
+  subgraph start["First steps"]
+    GS[getting-started/]
+    H[Home README]
+  end
+
+  subgraph depth["Technical depth"]
+    A[architecture]
+    O[operations]
+    S[security]
+    RC[reconciliation]
+    I[integrations]
+    L[load-testing]
+    R[reference]
+  end
+
+  ST --> H
+  GS --> H
+  H --> A
+  H --> O
+  H --> S
+  H --> RC
+  H --> I
+  H --> L
+  H --> R
 ```
 
 ---

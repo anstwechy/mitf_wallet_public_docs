@@ -8,7 +8,8 @@ Technical docs for the **MITF wallet** platform — APIs, architecture, operatio
 
 | Goal | Go to |
 | ----- | ----- |
-| First visit / tour | [Welcome & guided tours](getting-started/welcome.md) |
+| **Masarat executives & department heads** | [Platform at a glance — leadership](stakeholders/index.md) |
+| First technical visit / tour | [Welcome & guided tours](getting-started/welcome.md) |
 | Flat A–Z of every page | [Full A–Z index](getting-started/all-pages.md) |
 | Build this site locally | [Repository README](https://github.com/anstwechy/mitf_wallet_public_docs/blob/main/README.md) |
 
@@ -58,6 +59,7 @@ flowchart TB
 
 | Folder | What's inside |
 | ------ | ------------- |
+| [**stakeholders/**](stakeholders/index.md) | **Masarat leadership** — platform powers, executive / risk / ops tracks |
 | [**getting-started/**](getting-started/welcome.md) | Welcome tour + full A–Z index |
 | [**architecture/**](architecture/platform-capabilities.md) | Platform capabilities, events, consistency, flows, backpressure |
 | [**operations/**](operations/production-deployment.md) | Deploy, logging, load tests, runbooks |
