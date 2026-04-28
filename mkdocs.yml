@@ -102,12 +102,10 @@ theme:
         icon: material/brightness-4
         name: Switch to dark mode
   features:
-    - navigation.expand
-    - navigation.sections
+    - navigation.tracking
     - navigation.path
     - navigation.top
     - navigation.footer
-    - navigation.indexes
     - navigation.instant
     - navigation.instant.progress
     - search.suggest
