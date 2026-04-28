@@ -1,0 +1,152 @@
+# MITF Wallet public docs — MkDocs Material (same layout as aml_system_docs).
+# Local: pip install -r requirements.txt && mkdocs serve
+# Site:  https://anstwechy.github.io/mitf_wallet_public_docs/
+site_name: MITF Wallet documentation
+site_description: MITF wallet platform — technical documentation for integrators and operators
+site_author: Masarat
+site_url: https://anstwechy.github.io/mitf_wallet_public_docs/
+repo_url: https://github.com/anstwechy/mitf_wallet_public_docs
+repo_name: GitHub
+edit_uri: edit/main/docs/
+copyright: >
+  Masarat &middot; <a href="https://masarat.ly/">masarat.ly</a>
+
+docs_dir: docs
+site_dir: site
+
+validation:
+  nav:
+    omitted_files: info
+  links:
+    not_found: info
+    absolute_links: relative_to_docs
+    unrecognized_links: info
+
+exclude_docs: |
+  /site/**
+
+nav:
+  - "MITF Wallet at a glance": README.md
+  - "AML bridge & tenant resolution": aml-bridge-tenant-resolution.md
+  - Architecture:
+      - Platform capabilities: architecture/platform-capabilities.md
+      - Domain events: architecture/events.md
+      - Transaction flows & ledger examples: architecture/transaction-flows-and-ledger-examples.md
+      - Transfer backpressure (client contract): architecture/transfer-backpressure-client-contract.md
+      - Outbox & ledger consistency: architecture/outbox-and-ledger-consistency.md
+  - Operations:
+      - Production deployment: operations/production-deployment.md
+      - Logging: operations/logging.md
+      - Load testing operations: operations/load-testing-operations.md
+      - Reconciliation & consistency runbook: operations/reconciliation-and-consistency-runbook.md
+  - Reference:
+      - API reference: reference/api.md
+      - gRPC services: reference/grpc-services.md
+      - Configuration reference: reference/configuration-reference.md
+      - Service reference:
+          - Index: reference/service-reference/README.md
+          - Customer Gateway: reference/service-reference/Masarat.Gateway.Customer.Api.reference.md
+          - Gateway Management Web: reference/service-reference/Masarat.Gateway.Management.Web.reference.md
+          - KYC API: reference/service-reference/Masarat.Kyc.Api.reference.md
+          - Ledger API: reference/service-reference/Masarat.Ledger.Api.reference.md
+          - LoadTest job: reference/service-reference/Masarat.LoadTest.Job.reference.md
+          - Reconciliation job: reference/service-reference/Masarat.Reconciliation.Job.reference.md
+          - Reconciliation reporting: reference/service-reference/Masarat.Reconciliation.Reporting.reference.md
+          - Transactions API: reference/service-reference/Masarat.Transactions.Api.reference.md
+          - Users API: reference/service-reference/Masarat.Users.Api.reference.md
+          - Wallets API: reference/service-reference/Masarat.Wallets.Api.reference.md
+          - Webhooks API: reference/service-reference/Masarat.Webhooks.Api.reference.md
+  - Security:
+      - System hardening: security/system-hardening.md
+      - Onboarding channel hardening: security/onboarding-channel-hardening.md
+  - Reconciliation:
+      - Financial operations: reconciliation/financial-operations-and-reconciliation.md
+      - Reconciliation job: reconciliation/reconciliation.md
+  - Load testing:
+      - Reference runs: load-testing/load-test-reference-runs.md
+      - Stakeholder summary: load-testing/stakeholder-load-test-summary.md
+  - Integrations:
+      - AML integration: integrations/aml-integration.md
+      - FlowGuard wallet / AML: integrations/flowguard-wallet-aml.md
+
+theme:
+  name: material
+  custom_dir: overrides
+  logo: assets/masarat-logo.png
+  favicon: assets/favicon.png
+  language: en
+  font:
+    text: DM Sans
+    code: JetBrains Mono
+  palette:
+    - scheme: slate
+      primary: grey
+      accent: amber
+      toggle:
+        icon: material/brightness-7
+        name: Light mode
+    - scheme: default
+      primary: indigo
+      accent: cyan
+      toggle:
+        icon: material/brightness-4
+        name: Dark mode
+  features:
+    - navigation.expand
+    - navigation.sections
+    - navigation.path
+    - navigation.top
+    - navigation.footer
+    - navigation.indexes
+    - navigation.instant
+    - navigation.instant.progress
+    - search.suggest
+    - search.highlight
+    - search.share
+    - content.code.copy
+    - content.action.edit
+    - content.tooltips
+    - toc.follow
+
+markdown_extensions:
+  - attr_list
+  - tables
+  - admonition
+  - toc:
+      permalink: true
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.details
+  - pymdownx.betterem
+  - pymdownx.smartsymbols
+  - pymdownx.magiclink
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+
+extra:
+  masarat_logo_dark: assets/masarat-logo-dark.png
+  generator: false
+  site_description: |
+    Technical reference for the MITF wallet platform — architecture, APIs, operations, security, and integrations.
+  social:
+    - icon: fontawesome/solid/globe
+      link: https://masarat.ly/
+    - icon: fontawesome/brands/github
+      link: https://github.com/anstwechy/mitf_wallet_public_docs
+
+extra_css:
+  - stylesheets/extra.css
+
+strict: false
+
+plugins:
+  - search
