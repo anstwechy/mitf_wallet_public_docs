@@ -22,13 +22,12 @@ This document defines the phase-1 consistency model for wallet, transaction, and
 ```mermaid
 sequenceDiagram
   autonumber
-  participant App as Service handler
+  participant App as "Service handler"
   participant DB as PostgreSQL
-  participant OB as Outbox dispatcher
+  participant OB as "Outbox dispatcher"
   participant Q as RabbitMQ
   participant C as Consumer
 
-  %% Quote labels that contain ';' — otherwise Mermaid ends the statement early and the diagram breaks.
   App->>DB: "BEGIN; business rows + outbox rows"
   App->>DB: COMMIT
   OB->>DB: Read undispatched outbox
@@ -43,15 +42,15 @@ sequenceDiagram
 
 ```mermaid
 sequenceDiagram
-  participant T as Transactions svc
-  participant L as Ledger gRPC
+  participant T as "Transactions svc"
+  participant L as "Ledger gRPC"
 
-  T->>L: PostJournal / PostEntry
+  T->>L: "PostJournal / PostEntry"
   alt Network timeout or process crash
-    L-->>T: (no response)
-    Note over T: Caller cannot prove outcome → Unknown / reconcile
+    L-->>T: "(no response)"
+    Note over T: Outcome unknown until reconciliation
   else Definitive reply
-    L-->>T: Succeeded / Rejected / DuplicateAlreadyApplied
+    L-->>T: "Succeeded / Rejected / DuplicateAlreadyApplied"
   end
 ```
 
