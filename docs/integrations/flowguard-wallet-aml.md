@@ -1,9 +1,13 @@
-# FlowGuard (AML) integration — Masarat wallet
+# FlowGuard (AML) integration — Masarat wallet {: .wallet-lead }
 
 This document is the **canonical** plan for how **mitf_wallet** emits transaction-monitoring traffic to **FlowGuard** in the AML stack. It uses the contract already implemented and documented in the AML repository.
 
-## AML repository (source of truth)
+!!! info "At a glance"
+    **Publish path:** domain completion events → bridge worker → topic `aml.transactions` / `transaction.{BankCode}` → FlowGuard analyzer. **No** synchronous screening on `PostJournal` in this phase.
 
+---
+
+## AML repository (source of truth)
 
 | Item                                          | Location                                                                                                                                                                                                 |
 | --------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

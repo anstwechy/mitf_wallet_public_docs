@@ -1,6 +1,24 @@
-# AML bridge: tenant (`BankId`) resolution
+# AML bridge — tenant (`BankId`) resolution {: .wallet-lead }
 
-The Masarat domain events consumed by `Masarat.AmlBridge` do not carry a bank tenant. The bridge resolves **which bank** a transaction belongs to so it can pick the correct FlowGuard routing key (`transaction.{BankCode}`).
+The Masarat domain events consumed by `Masarat.AmlBridge` **do not** carry a bank tenant. The bridge resolves **which bank** a transaction belongs to so it can pick the correct FlowGuard routing key: `transaction.{BankCode}`.
+
+## Resolution flow
+
+```mermaid
+flowchart TD
+  E[Domain event e.g. TransferCompleted] --> TX[(Transactions DB: Transactions row)]
+  TX --> R{ReportingBankId set?}
+  R -->|Yes, non-empty Guid| B[Use as BankId]
+  R -->|No| W[FromWalletId or ToWalletId]
+  W --> WW[(Wallets DB: Wallets row)]
+  WW --> B2[Read BankId from wallet]
+  B --> MAP[AmlIntegration:BankCodes]
+  B2 --> MAP
+  MAP --> RK[Routing key transaction.BankCode]
+  MAP -->|lookup fails| WARN[Log warning — do not publish]
+```
+
+---
 
 ## Algorithm
 
@@ -10,6 +28,8 @@ The Masarat domain events consumed by `Masarat.AmlBridge` do not carry a bank te
 4. Look up that wallet id in the **wallets** database (`MasaratWallets`) table `"Wallets"` and read `"BankId"`.
 
 If any step fails (missing row, no wallet id, wallet not found), the bridge **logs a warning** and **does not publish** to FlowGuard.
+
+---
 
 ## Configuration
 

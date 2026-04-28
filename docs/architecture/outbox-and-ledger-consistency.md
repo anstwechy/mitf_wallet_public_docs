@@ -17,6 +17,43 @@ This document defines the phase-1 consistency model for wallet, transaction, and
 - This document does not turn ledger RPC calls into part of the local database transaction.
 - This document does not replace the existing bank-statement reconciliation flow described in `reconciliation/reconciliation.md`.
 
+## Outbox → broker → consumer (happy path)
+
+```mermaid
+sequenceDiagram
+  autonumber
+  participant App as Service handler
+  participant DB as PostgreSQL
+  participant OB as Outbox dispatcher
+  participant Q as RabbitMQ
+  participant C as Consumer
+
+  App->>DB: BEGIN; business rows + outbox rows
+  App->>DB: COMMIT
+  OB->>DB: Read undispatched outbox
+  OB->>Q: Publish message
+  OB->>DB: Mark dispatched
+  Q->>C: Deliver (at-least-once)
+  C->>C: Inbox + domain idempotency
+  C->>DB: Apply side-effects once
+```
+
+## Ledger RPC outside the local DB transaction (why `Unknown` exists)
+
+```mermaid
+sequenceDiagram
+  participant T as Transactions svc
+  participant L as Ledger gRPC
+
+  T->>L: PostJournal / PostEntry
+  alt Network timeout or process crash
+    L-->>T: (no response)
+    Note over T: Caller cannot prove outcome → Unknown / reconcile
+  else Definitive reply
+    L-->>T: Succeeded / Rejected / DuplicateAlreadyApplied
+  end
+```
+
 ## Boundary Guarantees
 
 | Boundary                                     | Phase-1 guarantee                            | Notes                                                                                                                                    |

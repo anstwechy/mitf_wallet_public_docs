@@ -1,8 +1,25 @@
-# AML integration (Masarat Wallet → FlowGuard)
+# AML integration (Masarat Wallet → FlowGuard) {: .wallet-lead }
 
-This repository publishes **transaction monitoring** messages to **FlowGuard** over RabbitMQ after successful wallet money movements, without blocking the transactions or ledger hot paths.
+After a wallet money movement **commits**, the platform can emit **domain events** consumed by `Masarat.AmlBridge`, which maps them to FlowGuard’s `TransactionQueueMessage` shape and publishes to RabbitMQ — **without blocking** the hot transaction or ledger path.
 
-## Components
+## End-to-end message flow
+
+```mermaid
+sequenceDiagram
+  autonumber
+  participant TX as Transactions / Wallets
+  participant OB as Outbox + broker
+  participant BR as AmlBridge worker
+  participant FG as FlowGuard (RabbitMQ consumer)
+
+  TX->>TX: Persist business outcome
+  TX->>OB: Outbox publish intent (same DB txn)
+  OB->>BR: Domain event delivered
+  BR->>BR: Resolve BankId → BankCode
+  BR->>FG: Publish transaction.{BankCode} on aml.transactions
+```
+
+---
 
 | Piece | Role |
 |--------|------|
@@ -33,7 +50,7 @@ RabbitMQ: **`RabbitMQ:Host`**, **`Port`**, **`Username`**, **`Password`** (same 
 
 ## Tenant resolution
 
-See [AML bridge & tenant resolution](../aml-bridge-tenant-resolution.md).
+See [AML bridge & tenant resolution](aml-bridge-tenant-resolution.md).
 
 ## Local / Docker
 

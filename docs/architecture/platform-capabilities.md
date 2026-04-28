@@ -2,6 +2,40 @@
 
 This document summarizes **what the codebase and runtime actually provide** today: financial correctness, resilience under failure and load, security boundaries, and operability. Use it with [Outbox and ledger consistency](outbox-and-ledger-consistency.md) for delivery semantics and recovery ownership.
 
+## Service map (logical view)
+
+```mermaid
+flowchart TB
+  subgraph clients["Clients"]
+    MOB[Mobile / partner apps]
+  end
+
+  GW[Customer Gateway]
+  U[Users API]
+  W[Wallets API]
+  T[Transactions API]
+  L[Ledger API]
+  RB[RabbitMQ]
+  DBW[(Wallets DB)]
+  DBT[(Transactions DB)]
+  DBL[(Ledger DB)]
+
+  MOB --> GW
+  GW --> U
+  GW --> W
+  GW --> T
+  T --> W
+  T --> L
+  T --> RB
+  W --> RB
+  W --> DBW
+  T --> DBT
+  L --> DBL
+```
+
+!!! tip "Async paths"
+    Many money movements are **queued** then completed via consumers — see [Domain events](events.md) and the outbox contract linked above.
+
 ---
 
 ## 1. Financial correctness (ledger and orchestration)

@@ -1,54 +1,71 @@
-# Masarat Wallet — documentation
+# 💳 MITF Wallet — documentation {: .wallet-lead}
 
-Technical documentation for the MITF wallet platform. Paths below are relative to this `docs/` folder.
-
-**Repository:** This site is built from the [`docs/`](https://github.com/anstwechy/mitf_wallet_public_docs/tree/main/docs) folder in [mitf_wallet_public_docs](https://github.com/anstwechy/mitf_wallet_public_docs). For clone, build, and GitHub Pages setup, see the [repository README](https://github.com/anstwechy/mitf_wallet_public_docs/blob/main/README.md).
+Technical docs for the **MITF wallet** platform — APIs, architecture, operations, security, and integrations. Everything below lives under the `docs/` folder in [mitf_wallet_public_docs](https://github.com/anstwechy/mitf_wallet_public_docs).
 
 ---
 
-## By role
+## Start here
+
+| Goal | Go to |
+| ----- | ----- |
+| First visit / tour | [Welcome & guided tours](getting-started/welcome.md) |
+| Flat A–Z of every page | [Full A–Z index](getting-started/all-pages.md) |
+| Build this site locally | [Repository README](https://github.com/anstwechy/mitf_wallet_public_docs/blob/main/README.md) |
+
+---
+
+## Who should read what?
+
+```mermaid
+flowchart TB
+  subgraph integrator["Integrator or app team"]
+    API[API reference]
+    GRPC[gRPC services]
+    BP[Backpressure contract]
+    API --> GRPC --> BP
+  end
+
+  subgraph ops["Ops or SRE"]
+    PD[Production deployment]
+    LOG[Logging]
+    RB[Runbooks]
+    PD --> LOG --> RB
+  end
+
+  subgraph fin["Finance or compliance"]
+    FO[Financial operations]
+    RJ[Reconciliation job]
+    AML[FlowGuard integration]
+    FO --> RJ
+    RJ --> AML
+  end
+```
+
+---
+
+## Quick picks by role
 
 | If you are… | Start here |
 | ----------- | ---------- |
 | **Integrating** (REST/gRPC, auth, async polling) | [API reference](reference/api.md), [gRPC services](reference/grpc-services.md), [Transfer backpressure](architecture/transfer-backpressure-client-contract.md) |
 | **Operating** (deploy, logs, load tests) | [Production deployment](operations/production-deployment.md), [Logging](operations/logging.md), [Load testing operations](operations/load-testing-operations.md) |
 | **Configuring** services | [Configuration reference](reference/configuration-reference.md), [Per-service reference](reference/service-reference/README.md) |
-| **Finance / audit** | [Financial operations and reconciliation](reconciliation/financial-operations-and-reconciliation.md), [Reconciliation job](reconciliation/reconciliation.md) |
+| **Finance / audit** | [Financial operations](reconciliation/financial-operations-and-reconciliation.md), [Reconciliation job](reconciliation/reconciliation.md) |
 
 ---
 
-## Directory map
+## Topic folders
 
-| Directory | Purpose |
-| --------- | ------- |
-| [**architecture/**](architecture/) | Platform capabilities, domain events, consistency contract, transaction examples, backpressure contract |
-| [**operations/**](operations/) | Production deployment, logging, load-test runbooks |
-| [**reference/**](reference/) | API, gRPC listing, configuration keys, [service-reference/](reference/service-reference/) (per-host settings and DB tables) |
-| [**security/**](security/) | API keys, PINs, tokens, hardening |
-| [**reconciliation/**](reconciliation/) | Bank reconciliation job and business-facing finance narrative |
-| [**load-testing/**](load-testing/) | Reference run results and stakeholder summaries |
-| [**integrations/**](integrations/) | External system integration plans (for example FlowGuard AML) |
+| Folder | What's inside |
+| ------ | ------------- |
+| [**getting-started/**](getting-started/welcome.md) | Welcome tour + full A–Z index |
+| [**architecture/**](architecture/platform-capabilities.md) | Platform capabilities, events, consistency, flows, backpressure |
+| [**operations/**](operations/production-deployment.md) | Deploy, logging, load tests, runbooks |
+| [**reference/**](reference/api.md) | API, gRPC, config keys, [service-reference/](reference/service-reference/README.md) |
+| [**security/**](security/system-hardening.md) | Hardening and onboarding-channel notes |
+| [**reconciliation/**](reconciliation/reconciliation.md) | Finance narrative + reconciliation job |
+| [**load-testing/**](load-testing/load-test-reference-runs.md) | Reference runs + stakeholder summary |
+| [**integrations/**](integrations/aml-integration.md) | AML bridge, FlowGuard plan, tenant resolution |
 
----
-
-## All guides (A–Z)
-
-| Document | Description |
-| -------- | ----------- |
-| [API reference](reference/api.md) | REST/gRPC usage, grpcurl, auth, health |
-| [Configuration reference](reference/configuration-reference.md) | Cross-service configuration and env vars |
-| [Domain events](architecture/events.md) | RabbitMQ event contracts |
-| [Financial operations and reconciliation](reconciliation/financial-operations-and-reconciliation.md) | Flows, ledger mapping, reversal (business audience) |
-| [FlowGuard AML integration](integrations/flowguard-wallet-aml.md) | Wallet to FlowGuard monitoring: bridge, RabbitMQ contract, phases, ops matrix |
-| [gRPC services](reference/grpc-services.md) | RPC and message listing |
-| [Load test reference runs](load-testing/load-test-reference-runs.md) | Recorded scenarios, metrics, comparisons |
-| [Load testing operations](operations/load-testing-operations.md) | How to run overlays and read diagnostics |
-| [Logging](operations/logging.md) | Structured logs, correlation, Loki/OTLP |
-| [Outbox and ledger consistency](architecture/outbox-and-ledger-consistency.md) | Messaging durability, ledger ambiguity, recovery ownership |
-| [Platform capabilities](architecture/platform-capabilities.md) | Consistency, durability, security, observability |
-| [Production deployment](operations/production-deployment.md) | Sizing, ports, secrets, pools, load |
-| [Reconciliation job](reconciliation/reconciliation.md) | Daily ledger vs bank export job |
-| [Stakeholder load test summary](load-testing/stakeholder-load-test-summary.md) | Short throughput/consistency summary |
-| [System hardening](security/system-hardening.md) | API keys, PIN, tokens, secrets |
-| [Transaction flows and ledger examples](architecture/transaction-flows-and-ledger-examples.md) | Worked examples |
-| [Transfer backpressure client contract](architecture/transfer-backpressure-client-contract.md) | Ingress limits and client retry rules |
+!!! note "Different from FlowGuard AML docs"
+    This site uses a **teal / emerald** theme and coral accents so it is visually distinct from the purple FlowGuard documentation set.

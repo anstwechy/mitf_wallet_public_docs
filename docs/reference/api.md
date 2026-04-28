@@ -8,6 +8,24 @@
 - **Domain events:** [Domain events](../architecture/events.md) — RabbitMQ events published by the system.
 - **Logging (operations):** [Logging](../operations/logging.md) — structured logging, correlation ID, configuration, and runbook.
 
+## Typical call: Customer Gateway → core services
+
+```mermaid
+sequenceDiagram
+  autonumber
+  participant App as Mobile app
+  participant GW as Customer Gateway
+  participant U as Users API
+  participant W as Wallets gRPC
+  participant T as Transactions gRPC
+
+  App->>GW: HTTPS (app API key, optional JWT)
+  GW->>U: REST / delegated calls
+  GW->>W: gRPC + metadata
+  GW->>T: gRPC + x-bank-id + idempotency
+  T-->>App: request_id / request_status (async money RPCs)
+```
+
 ---
 
 Base URLs when running locally (without Docker):

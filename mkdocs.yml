@@ -1,4 +1,4 @@
-# MITF Wallet public docs — MkDocs Material (same layout as aml_system_docs).
+# MITF Wallet public docs — MkDocs Material (teal / emerald theme, distinct from AML docs).
 # Local: pip install -r requirements.txt && mkdocs serve
 # Site:  https://anstwechy.github.io/mitf_wallet_public_docs/
 site_name: MITF Wallet documentation
@@ -26,8 +26,10 @@ exclude_docs: |
   /site/**
 
 nav:
-  - "MITF Wallet at a glance": README.md
-  - "AML bridge & tenant resolution": aml-bridge-tenant-resolution.md
+  - "Home": README.md
+  - Getting started:
+      - Welcome & guided tours: getting-started/welcome.md
+      - Full A–Z index: getting-started/all-pages.md
   - Architecture:
       - Platform capabilities: architecture/platform-capabilities.md
       - Domain events: architecture/events.md
@@ -66,8 +68,9 @@ nav:
       - Reference runs: load-testing/load-test-reference-runs.md
       - Stakeholder summary: load-testing/stakeholder-load-test-summary.md
   - Integrations:
-      - AML integration: integrations/aml-integration.md
-      - FlowGuard wallet / AML: integrations/flowguard-wallet-aml.md
+      - AML integration (overview): integrations/aml-integration.md
+      - FlowGuard wallet / AML plan: integrations/flowguard-wallet-aml.md
+      - AML bridge — tenant resolution: integrations/aml-bridge-tenant-resolution.md
 
 theme:
   name: material
@@ -76,21 +79,22 @@ theme:
   favicon: assets/favicon.png
   language: en
   font:
-    text: DM Sans
-    code: JetBrains Mono
+    text: Inter
+    code: Fira Code
   palette:
+    # Dark first — forest chrome + mint (different from FlowGuard slate/grey/amber)
     - scheme: slate
-      primary: grey
-      accent: amber
+      primary: teal
+      accent: deep orange
       toggle:
         icon: material/brightness-7
-        name: Light mode
+        name: Switch to light mode
     - scheme: default
-      primary: indigo
-      accent: cyan
+      primary: green
+      accent: deep orange
       toggle:
         icon: material/brightness-4
-        name: Dark mode
+        name: Switch to dark mode
   features:
     - navigation.expand
     - navigation.sections
