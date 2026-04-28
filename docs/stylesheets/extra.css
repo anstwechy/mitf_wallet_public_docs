@@ -213,6 +213,18 @@
   display: none !important;
 }
 
+/*
+ * Mobile drawer: Material paints .md-nav__title[for="__drawer"] with
+ * background-color: var(--md-primary-fg-color). In slate we set primary fg to a
+ * light mint for the top app bar, which makes the drawer header strip light while
+ * the visible asset is flow-logo--dark (white mark for dark surfaces) — it looks
+ * washed out. Align this strip with the sidebar so the dark-mode logo contrasts.
+ */
+[data-md-color-scheme="slate"] .md-nav--primary .md-nav__title[for="__drawer"] {
+  background-color: var(--md-default-bg-color);
+  color: var(--md-default-fg-color);
+}
+
 /* Hide legacy tab strip (site uses drawer nav only) */
 .md-tabs,
 .md-tabs__inner {
