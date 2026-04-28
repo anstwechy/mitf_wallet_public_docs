@@ -2,6 +2,14 @@
 
 Use the **sidebar** for the recommended order. This page is a **flat lookup** by title.
 
+## Site home
+
+| Page | Description |
+| ---- | ----------- |
+| [Site home (welcome)](../README.md) | Masarat and the platform — orientation without technical depth; links into the rest of the site |
+
+---
+
 ## Masarat leadership
 
 | Page | Description |

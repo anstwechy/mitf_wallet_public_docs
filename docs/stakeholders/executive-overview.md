@@ -35,7 +35,7 @@ Masarat Wallet is a **white-label style wallet platform**: a regulated instituti
 | **Evidence of throughput** | Internal test campaigns show **strong sustained payment rates** in a lab setup — useful for **capacity conversations** with stakeholders ([short summary](../load-testing/stakeholder-load-test-summary.md)). |
 
 ??? tip "For technical teams"
-    Implementation detail (gateway, tokens, bank identifiers, bridge service names) is in [AML integration](../integrations/aml-integration.md) and the [technical home](../README.md).
+    Implementation detail (gateway, tokens, bank identifiers, bridge service names) is in [AML integration](../integrations/aml-integration.md), [Welcome & guided tours](../getting-started/welcome.md), and the [full A–Z index](../getting-started/all-pages.md).
 
 ---
 

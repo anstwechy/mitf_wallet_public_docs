@@ -1,78 +1,47 @@
-# 💳 MITF Wallet — documentation {: .wallet-lead}
+# MITF Wallet — by Masarat {: .wallet-lead }
 
-Technical docs for the **MITF wallet** platform — APIs, architecture, operations, security, and integrations. Everything below lives under the `docs/` folder in [mitf_wallet_public_docs](https://github.com/anstwechy/mitf_wallet_public_docs).
+**[Masarat](https://masarat.ly/)** builds financial infrastructure people can rely on. **MITF Wallet** is our platform for **digital wallets**: onboarding, balances, person-to-person and merchant payments, cash-out, and treasury-style flows — anchored in a **single official ledger** so finance, partners, and auditors see one truthful story of where money moved.
 
----
-
-## Start here
-
-| Goal | Go to |
-| ----- | ----- |
-| **Masarat executives & department heads** | [Platform at a glance — leadership](stakeholders/index.md) |
-| **New developer — 5-minute quickstart** (curl + auth) | [Quickstart](getting-started/quickstart.md) |
-| First technical visit / tour | [Welcome & guided tours](getting-started/welcome.md) |
-| Flat A–Z of every page | [Full A–Z index](getting-started/all-pages.md) |
-| **Changelog & releases** (integrators tracking updates) | [Changelog & releases](changelog.md) |
-| Build this site locally | [Repository README](https://github.com/anstwechy/mitf_wallet_public_docs/blob/main/README.md) |
+This page is the **front door**: who we are, why the product exists, and where to go next. Deep technical material lives behind **[Welcome & guided tours](getting-started/welcome.md)** and the rest of the sidebar — on purpose.
 
 ---
 
-## Who should read what?
+## What we’re proud of
 
-```mermaid
-flowchart TB
-  subgraph integrator["Integrator or app team"]
-    API[API reference]
-    GRPC[gRPC services]
-    BP[Backpressure contract]
-    API --> GRPC --> BP
-  end
+- **Built for regulated reality** — partner banks and supervised programmes, not toy demos.
+- **Engineered for correctness** — money movement, retries, async hand-offs, and reconciliation are treated as core product, not polish at the end.
+- **Operated with care** — security hardening, observability, load testing, and clean hand-off to **FlowGuard** for AML reflect how we ship.
 
-  subgraph ops["Ops or SRE"]
-    PD[Production deployment]
-    LOG[Logging]
-    RB[Runbooks]
-    PD --> LOG --> RB
-  end
-
-  subgraph fin["Finance or compliance"]
-    FO[Financial operations]
-    RJ[Reconciliation job]
-    AML[FlowGuard integration]
-    FO --> RJ
-    RJ --> AML
-  end
-```
+We document because **integrators, auditors, risk, and our own teams** deserve the same map of the system.
 
 ---
 
-## Quick picks by role
+## The team behind the platform
 
-| If you are… | Start here |
-| ----------- | ---------- |
-| **Integrating** (REST/gRPC, auth, async polling) | [Quickstart](getting-started/quickstart.md), [API reference](reference/api.md), [gRPC services](reference/grpc-services.md), [Transfer backpressure](architecture/transfer-backpressure-client-contract.md), [Changelog & releases](changelog.md) |
-| **Operating** (deploy, logs, load tests) | [Production deployment](operations/production-deployment.md), [Logging](operations/logging.md), [Load testing operations](operations/load-testing-operations.md), [Reconciliation & consistency runbook](operations/reconciliation-and-consistency-runbook.md) |
-| **Configuring** services | [Configuration reference](reference/configuration-reference.md), [Per-service reference](reference/service-reference/README.md) |
-| **Finance / audit** | [Financial operations](reconciliation/financial-operations-and-reconciliation.md), [Reconciliation job](reconciliation/reconciliation.md) |
+MITF Wallet is the work of **Masarat’s product and engineering organisation**: architects, backend and gateway engineers, operators, and security-minded reviewers who live across the **mitf_wallet** ecosystem — customer channels, ledger, wallets, transactions, identity, reconciliation, bridges, and everything that keeps the lights on in production.
+
+If you work with Masarat, you work with people who believe **clarity, safety, and runnability** are part of the product — not optional footnotes.
 
 ---
 
-## Topic folders
+## Where to go next
 
-| Folder | What's inside |
-| ------ | ------------- |
-| [**stakeholders/**](stakeholders/index.md) | **Masarat leadership** — platform powers, executive / risk / ops tracks |
-| [**getting-started/**](getting-started/welcome.md) | Quickstart, welcome tour, full A–Z index |
-| [**Changelog & releases**](changelog.md) | Release notes links for integrators |
-| [**architecture/**](architecture/platform-capabilities.md) | Platform capabilities, events, consistency, flows, backpressure |
-| [**operations/**](operations/production-deployment.md) | Deploy, logging, load tests, runbooks |
-| [**reference/**](reference/api.md) | API, gRPC, config keys, [service-reference/](reference/service-reference/README.md) |
-| [**security/**](security/system-hardening.md) | Hardening and onboarding-channel notes |
-| [**reconciliation/**](reconciliation/reconciliation.md) | Finance narrative + reconciliation job |
-| [**load-testing/**](load-testing/load-test-reference-runs.md) | Reference runs + stakeholder summary |
-| [**integrations/**](integrations/aml-integration.md) | AML bridge, FlowGuard plan, tenant resolution |
-| [**compliance/**](compliance/offline-packs.md) | Offline packs (print / PDF) for security & reconciliation chapters |
-| [**accessibility**](accessibility.md) | Keyboard use, contrast, motion, how to report gaps |
+| You are… | Start here |
+| -------- | ---------- |
+| **Leadership or business** at Masarat | [Platform at a glance](stakeholders/index.md) — outcomes in plain language |
+| **Navigating the site** (any role) | [Welcome & guided tours](getting-started/welcome.md) — APIs, ops, finance, and config in reading order |
+| **Integrating quickly** | [5-minute quickstart](getting-started/quickstart.md) |
+| **Every page in one table** | [Full A–Z index](getting-started/all-pages.md) |
+| **Release and doc updates** | [Changelog & releases](changelog.md) |
 
-!!! note "Different from FlowGuard AML docs"
-    This site uses a **teal / emerald** theme and coral accents so it is visually distinct from the purple FlowGuard documentation set.
+---
+
+!!! tip "Technical library"
+    Architecture, API and gRPC references, service-by-service configuration, operations runbooks, and integrations are all in the **sidebar**. Use this home page for **orientation**; use [Welcome & guided tours](getting-started/welcome.md) when you’re ready to go deep.
+
+!!! note "Separate from FlowGuard AML docs"
+    This site uses a **teal / emerald** palette (with coral accents) so it stays visually distinct from the purple **FlowGuard AML** documentation set.
+
+---
+
+[masarat.ly](https://masarat.ly/) · [This site on GitHub](https://github.com/anstwechy/mitf_wallet_public_docs)

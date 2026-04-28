@@ -1,6 +1,6 @@
 # Masarat API Reference
 
-- **Documentation index:** [Documentation README](../README.md) — list of all docs.
+- **Documentation hub:** [Welcome & guided tours](../getting-started/welcome.md) — reading order; [full A–Z index](../getting-started/all-pages.md) — every page. [Site home](../README.md) — Masarat welcome and orientation.
 - **Platform capabilities (consistency, security):** [Platform capabilities](../architecture/platform-capabilities.md).
 - **Configuration (all apps):** [Configuration reference](configuration-reference.md).
 - **gRPC quick reference:** [gRPC services](grpc-services.md) — all RPCs and message fields.

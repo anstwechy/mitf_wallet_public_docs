@@ -3,7 +3,7 @@
 Pick your lane below, then follow the **reading order** so nothing depends on missing context.
 
 !!! tip "New here?"
-    **Masarat leadership:** start with [Stakeholder hub](../stakeholders/index.md). **Engineers:** use [Home](../README.md), then pick a path below.
+    **Masarat leadership:** start with [Stakeholder hub](../stakeholders/index.md). **Integrators, operators, and engineers:** use [Welcome & guided tours](welcome.md) (reading order and paths); the [site home](../README.md) is a short Masarat-oriented welcome.
 
 ---
 
@@ -60,7 +60,8 @@ flowchart TB
 
   subgraph start["First steps"]
     GS[getting-started/]
-    H[Home README]
+    SH[Site home]
+    W[Welcome & tours]
   end
 
   subgraph depth["Technical depth"]
@@ -73,15 +74,16 @@ flowchart TB
     R[reference]
   end
 
-  ST --> H
-  GS --> H
-  H --> A
-  H --> O
-  H --> S
-  H --> RC
-  H --> I
-  H --> L
-  H --> R
+  ST --> SH
+  GS --> SH
+  SH --> W
+  W --> A
+  W --> O
+  W --> S
+  W --> RC
+  W --> I
+  W --> L
+  W --> R
 ```
 
 ---

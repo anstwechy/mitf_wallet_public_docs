@@ -18,7 +18,7 @@ This page is written for **leaders and business owners** at Masarat. It stays hi
 | **Run the bank** | Teams get **dashboards and logs** for operations, plus **reconciliation** tools to compare the ledger with bank statements. |
 
 ??? tip "For technical teams — map to the codebase"
-    The behaviour above is implemented in Masarat’s internal **mitf_wallet** repository (services such as **Customer Gateway**, **Users**, **Wallets**, **Transactions**, **Ledger**, **AML bridge**, **reconciliation**, **KYC**, and observability). Use the [technical home](../README.md) for service names and configuration detail.
+    The behaviour above is implemented in Masarat’s internal **mitf_wallet** repository (services such as **Customer Gateway**, **Users**, **Wallets**, **Transactions**, **Ledger**, **AML bridge**, **reconciliation**, **KYC**, and observability). For reading order, APIs, and architecture, use [Welcome & guided tours](../getting-started/welcome.md); for a flat list of every page, use the [full A–Z index](../getting-started/all-pages.md).
 
 ---
 
@@ -64,7 +64,7 @@ flowchart TB
 | **Own strategy, commercial, or the business case** | [Executive & business overview](executive-overview.md) |
 | **Own risk, compliance, AML, audit, or finance control** | [Risk, compliance & finance](risk-compliance-and-finance.md) |
 | **Own IT delivery, infrastructure, or day-to-day operations** | [Operations & technology leadership](operations-and-technology.md) |
-| **Need APIs, diagrams, and implementation detail** | [Technical documentation home](../README.md) |
+| **Need APIs, diagrams, and implementation detail** | [Welcome & guided tours](../getting-started/welcome.md) · [Full A–Z index](../getting-started/all-pages.md) |
 
 ---
 
@@ -77,4 +77,4 @@ Masarat has run **large-scale internal tests** (including deliberate failures an
 ## Inside Masarat
 
 1. Bookmark **this page** as the leadership entry to the docs.  
-2. Send **product and delivery** teams to the [technical home](../README.md) when they need specifications.
+2. Send **product and delivery** teams to [Welcome & guided tours](../getting-started/welcome.md) (and the [A–Z index](../getting-started/all-pages.md)) when they need specifications and depth.

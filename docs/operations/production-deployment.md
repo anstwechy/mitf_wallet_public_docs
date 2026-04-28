@@ -2,7 +2,7 @@
 
 Sizing, ports, network, secrets, config. Audience: deployment, security, network.
 
-**Also:** [Documentation index](../README.md), [Configuration reference](../reference/configuration-reference.md), [Platform capabilities](../architecture/platform-capabilities.md), [System hardening](../security/system-hardening.md), [API](../reference/api.md), [gRPC services](../reference/grpc-services.md), [Logging](logging.md), [Reconciliation & consistency runbook](reconciliation-and-consistency-runbook.md), [Load testing operations](load-testing-operations.md), [Load test reference runs](../load-testing/load-test-reference-runs.md), [Transfer backpressure](../architecture/transfer-backpressure-client-contract.md)
+**Also:** [Welcome & guided tours](../getting-started/welcome.md), [Full A–Z index](../getting-started/all-pages.md), [Configuration reference](../reference/configuration-reference.md), [Platform capabilities](../architecture/platform-capabilities.md), [System hardening](../security/system-hardening.md), [API](../reference/api.md), [gRPC services](../reference/grpc-services.md), [Logging](logging.md), [Reconciliation & consistency runbook](reconciliation-and-consistency-runbook.md), [Load testing operations](load-testing-operations.md), [Load test reference runs](../load-testing/load-test-reference-runs.md), [Transfer backpressure](../architecture/transfer-backpressure-client-contract.md)
 
 ---
 
@@ -360,7 +360,8 @@ Flow: clients → **Transactions** → **Wallets** + **Ledger** + **Postgres** +
 
 | Document                                                                                 | Audience                      | Content                                                 |
 | ---------------------------------------------------------------------------------------- | ----------------------------- | ------------------------------------------------------- |
-| [Documentation index](../README.md) | All | Entry point to all guides on this site |
+| [Welcome & guided tours](../getting-started/welcome.md) | All | Reading order and role paths into this site |
+| [Full A–Z index](../getting-started/all-pages.md) | All | Flat list of every page |
 | [Production deployment](production-deployment.md) | Deployment, Security, Network | Sizing, network, secrets, load (this file) |
 | [System hardening](../security/system-hardening.md) | Security, Ops | API key, PIN, token, logging, TLS, secrets |
 | [API](../reference/api.md) | Developers, Integration | REST/gRPC reference, auth, bank context |

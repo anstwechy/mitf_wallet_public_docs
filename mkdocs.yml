@@ -2,7 +2,7 @@
 # Local: pip install -r requirements.txt && mkdocs serve
 # Site:  https://anstwechy.github.io/mitf_wallet_public_docs/
 site_name: MITF Wallet documentation
-site_description: MITF wallet platform — technical documentation for integrators and operators
+site_description: MITF Wallet — digital wallet platform by Masarat; guides for partners, leadership, and technical teams
 site_author: Masarat
 site_url: https://anstwechy.github.io/mitf_wallet_public_docs/
 repo_url: https://github.com/anstwechy/mitf_wallet_public_docs
@@ -26,7 +26,7 @@ exclude_docs: |
   /site/**
 
 nav:
-  - "Home (technical hub)": README.md
+  - Home: README.md
   - "For Masarat leadership":
       - "Platform at a glance": stakeholders/index.md
       - "Executive & business overview": stakeholders/executive-overview.md
@@ -152,7 +152,7 @@ extra:
   masarat_logo_dark: assets/masarat-logo-dark.png
   generator: false
   site_description: |
-    Technical reference for the MITF wallet platform — architecture, APIs, operations, security, and integrations.
+    MITF Wallet by Masarat — site home, partner and leadership guides, and technical references (architecture, APIs, operations, security, integrations).
   social:
     - icon: fontawesome/solid/globe
       link: https://masarat.ly/

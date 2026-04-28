@@ -114,7 +114,7 @@ flowchart TB
 
 ## Related documentation
 
-- [Documentation index](../README.md) — all guides and references on this site  
+- [Documentation hub](../getting-started/welcome.md) — reading order; [full A–Z index](../getting-started/all-pages.md) — every page.  
 - [Financial operations and reconciliation](../reconciliation/financial-operations-and-reconciliation.md) — flows and reversal  
 - [Production deployment](../operations/production-deployment.md) — sizing and deployment  
 - [Domain events](events.md) — published domain events  
