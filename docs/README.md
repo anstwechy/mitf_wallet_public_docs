@@ -18,9 +18,7 @@ We document because **integrators, auditors, risk, and our own teams** deserve t
 
 ## The team behind the platform
 
-MITF Wallet is the work of **Masarat’s product and engineering organisation**: architects, backend and gateway engineers, operators, and security-minded reviewers who live across the **mitf_wallet** ecosystem — customer channels, ledger, wallets, transactions, identity, reconciliation, bridges, and everything that keeps the lights on in production.
-
-If you work with Masarat, you work with people who believe **clarity, safety, and runnability** are part of the product — not optional footnotes.
+**MITF Wallet was built by Masarat’s development team** — the engineers who design, implement, and run the **mitf_wallet** stack end to end.
 
 ---
 
