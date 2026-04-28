@@ -21,7 +21,7 @@ This section is the **explicit contract** for how integration surfaces evolve. A
 
 ### Examples: non-breaking vs breaking (REST)
 
-Use these **patterns** when reviewing release notes or the [API changelog & deprecations](api-changelog.md).
+Use these **patterns** when reviewing release notes or [Changelog & releases](../changelog.md).
 
 | Change | Verdict | Rationale |
 | ------ | ------- | --------- |
@@ -33,7 +33,7 @@ Use these **patterns** when reviewing release notes or the [API changelog & depr
 | Changing `POST /onboarding/accounts` success from `201` to `200` | **Breaking** | HTTP semantics and client branching change. |
 | Tightening validation (e.g. shorter max length on `FullName`) so previously accepted values now return `400` | **Usually breaking** | Treat as breaking unless the narrower rule only rejects values already documented as invalid. |
 | Webhook payload: new optional field on `TransferCompletedEvent` JSON | **Non-breaking** | Subscribers should ignore unknown keys; document in [events](../architecture/events.md) release notes. |
-| Removing `GET /webhooks/{id}` | **Breaking** | Any client depending on that route must migrate before removal — track in [API changelog](api-changelog.md). |
+| Removing `GET /webhooks/{id}` | **Breaking** | Any client depending on that route must migrate before removal — track in [Changelog & releases](../changelog.md). |
 
 **Deprecations:** Prefer **document → warn (logs/metrics) → dual support → remove** with dates recorded in the changelog, not silent removal.
 

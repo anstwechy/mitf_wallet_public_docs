@@ -42,9 +42,8 @@ We do not replace a formal **WCAG audit** or VPAT; this statement supports integ
 
 ## Diagrams (Mermaid) & alt text
 
-- **Mermaid** renders as vector graphics in the browser. Screen-reader users may not receive a full automatic description. For **important** diagrams, add a **one- or two-sentence summary** immediately before or after the diagram (pattern used in [Troubleshooting flowcharts](operations/troubleshooting.md)).
+- **Mermaid** renders as vector graphics in the browser. Screen-reader users may not receive a full automatic description. For **important** diagrams, add a **one- or two-sentence summary** immediately before or after the diagram.
 - **Colour:** do not rely on colour alone to distinguish states in new diagrams; use labels or shapes where possible.
-- **Media policy:** see [Media & interactive diagrams](meta/media-and-diagrams.md) for video and external tools.
 
 ---
 

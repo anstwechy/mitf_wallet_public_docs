@@ -25,8 +25,6 @@ validation:
 exclude_docs: |
   /site/**
 
-# Nav order: leadership first, then onboarding, deep architecture, assurance layers,
-# integrations, evidence (load tests), encyclopedic reference last.
 nav:
   - "Home (technical hub)": README.md
   - "For Masarat leadership":
@@ -36,17 +34,11 @@ nav:
       - "Operations & technology": stakeholders/operations-and-technology.md
   - Getting started:
       - "5-minute quickstart": getting-started/quickstart.md
-      - "Local development setup": getting-started/local-development.md
       - Welcome & guided tours: getting-started/welcome.md
       - Full A–Z index: getting-started/all-pages.md
   - "Changelog & releases": changelog.md
-  - Glossary: glossary.md
   - Architecture:
       - Platform capabilities: architecture/platform-capabilities.md
-      - "Architecture Decision Records":
-          - Index: architecture/decisions/README.md
-          - ADR template: architecture/decisions/0000-template.md
-          - "ADR 0001: Outbox & messaging": architecture/decisions/0001-outbox-and-transactional-messaging.md
       - Domain events: architecture/events.md
       - Money movement (sequence diagrams): architecture/money-movement-sequence-diagrams.md
       - Transaction flows & ledger examples: architecture/transaction-flows-and-ledger-examples.md
@@ -55,22 +47,11 @@ nav:
   - Security:
       - System hardening: security/system-hardening.md
       - Onboarding channel hardening: security/onboarding-channel-hardening.md
-      - "Rate limits, audit, secrets, mTLS": security/security-operations-advanced.md
   - "Compliance & offline":
       - "Offline packs (print / PDF)": compliance/offline-packs.md
   - Accessibility: accessibility.md
   - Operations:
       - Production deployment: operations/production-deployment.md
-      - "Disaster recovery runbook": operations/disaster-recovery-runbook.md
-      - "Incident response playbook": operations/incident-response-playbook.md
-      - "Schema & migration (production)": operations/schema-migration-guide.md
-      - "Capacity planning": operations/capacity-planning.md
-      - "Performance tuning": operations/performance-tuning.md
-      - "Troubleshooting (flowcharts)": operations/troubleshooting.md
-      - "Platform resilience & DLQ": operations/platform-resilience.md
-      - "Observability standards": operations/observability-standards.md
-      - "Data lifecycle & retention": operations/data-lifecycle.md
-      - "CI/CD & deployment patterns": operations/cicd-deployment.md
       - Logging: operations/logging.md
       - Load testing operations: operations/load-testing-operations.md
       - Reconciliation & consistency runbook: operations/reconciliation-and-consistency-runbook.md
@@ -86,9 +67,6 @@ nav:
       - Reference runs: load-testing/load-test-reference-runs.md
   - Reference:
       - API reference: reference/api.md
-      - "API changelog & deprecations": reference/api-changelog.md
-      - "API clients & collections": reference/api-client-and-collections.md
-      - "OpenAPI in docs (advanced)": reference/openapi-in-docs.md
       - gRPC services: reference/grpc-services.md
       - Configuration reference: reference/configuration-reference.md
       - Service reference:
@@ -104,9 +82,6 @@ nav:
           - Users API: reference/service-reference/Masarat.Users.Api.reference.md
           - Wallets API: reference/service-reference/Masarat.Wallets.Api.reference.md
           - Webhooks API: reference/service-reference/Masarat.Webhooks.Api.reference.md
-  - "Doc roadmap & media":
-      - "Documentation roadmap": meta/documentation-roadmap.md
-      - "Media & diagrams": meta/media-and-diagrams.md
 
 theme:
   name: material
@@ -190,10 +165,7 @@ extra_css:
 strict: false
 
 plugins:
-  # search first — recommended when using multiple plugins
   - search
-  # Last-updated line on each page (Material source-file partial). Plugin `strict: false`
-  # keeps "no git history yet" as INFO so CI `mkdocs build --strict` still passes.
   - git-revision-date-localized:
       strict: false
       enable_creation_date: false
