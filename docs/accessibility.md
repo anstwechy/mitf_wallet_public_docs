@@ -37,3 +37,32 @@ Decorative motion (e.g. gradient background animation) is reduced when the reade
 - **Accessibility-specific:** open an issue with label **accessibility** (create it if your repo does not list it yet) and include page URL, browser, assistive technology, and expected vs actual behaviour.
 
 We do not replace a formal **WCAG audit** or VPAT; this statement supports integrators and internal compliance teams who need transparency on intent and on how to escalate problems.
+
+---
+
+## Diagrams (Mermaid) & alt text
+
+- **Mermaid** renders as vector graphics in the browser. Screen-reader users may not receive a full automatic description. For **important** diagrams, add a **one- or two-sentence summary** immediately before or after the diagram (pattern used in [Troubleshooting flowcharts](operations/troubleshooting.md)).
+- **Colour:** do not rely on colour alone to distinguish states in new diagrams; use labels or shapes where possible.
+- **Media policy:** see [Media & interactive diagrams](meta/media-and-diagrams.md) for video and external tools.
+
+---
+
+## Contrast (WCAG-oriented)
+
+The **teal / orange** theme is tuned for readability, but **WCAG 2.x contrast** for every interactive state has not been certified in this repo. If you need **formal AA/AAA** evidence:
+
+1. Run an automated pass (axe, Lighthouse, or equivalent) on key templates.  
+2. Manually verify **focus**, **hover**, and **active** states on header, search, tabs, and admonitions.  
+3. File issues with repro steps and screenshots.
+
+---
+
+## Screen readers
+
+Recommended smoke tests (quarterly or before major theme upgrades):
+
+- **NVDA** (Windows) or **VoiceOver** (macOS/iOS) — navigate home, a long table page (for example [API reference](reference/api.md)), and the search dialog.  
+- Confirm **headings** and **landmarks** make sense (Material provides main landmark and heading hierarchy from markdown).  
+
+Report defects with **browser + OS + AT version**.

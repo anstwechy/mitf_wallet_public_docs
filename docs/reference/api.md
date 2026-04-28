@@ -19,6 +19,24 @@ This section is the **explicit contract** for how integration surfaces evolve. A
 - **Integrator expectation:** Treat **additive** changes (new optional fields, new endpoints) as backward compatible unless release notes say otherwise. Treat **removed fields, renamed properties, new required fields, changed status codes, or semantic changes** as **breaking** — require a coordinated client and server upgrade.
 - **Headers and auth:** Changes to required headers (for example `X-Api-Key`, `Authorization`, `x-bank-id`, `Idempotency-Key`) or to JWT claims are **contract changes** and should appear in release notes.
 
+### Examples: non-breaking vs breaking (REST)
+
+Use these **patterns** when reviewing release notes or the [API changelog & deprecations](api-changelog.md).
+
+| Change | Verdict | Rationale |
+| ------ | ------- | --------- |
+| New **optional** JSON field on `POST /onboarding/accounts` | **Non-breaking** | Old clients ignore unknown fields; servers accept omitted field. |
+| New endpoint `GET /profiles/me` | **Non-breaking** | Existing clients are untouched. |
+| New **optional** response field `walletLabel` on `201` onboarding response | **Non-breaking** | Clients that deserialize into DTOs should tolerate extra properties. |
+| Making `CustomerType` **required** when it was previously optional with a server default | **Breaking** | Requests that omitted the field now fail validation. |
+| Renaming JSON `NationalId` → `national_id` without a dual-property period | **Breaking** | All existing JSON clients break at once. |
+| Changing `POST /onboarding/accounts` success from `201` to `200` | **Breaking** | HTTP semantics and client branching change. |
+| Tightening validation (e.g. shorter max length on `FullName`) so previously accepted values now return `400` | **Usually breaking** | Treat as breaking unless the narrower rule only rejects values already documented as invalid. |
+| Webhook payload: new optional field on `TransferCompletedEvent` JSON | **Non-breaking** | Subscribers should ignore unknown keys; document in [events](../architecture/events.md) release notes. |
+| Removing `GET /webhooks/{id}` | **Breaking** | Any client depending on that route must migrate before removal — track in [API changelog](api-changelog.md). |
+
+**Deprecations:** Prefer **document → warn (logs/metrics) → dual support → remove** with dates recorded in the changelog, not silent removal.
+
 ### gRPC
 
 - **Contract:** `.proto` definitions and generated stubs define the RPC and message shapes. **Wire compatibility** follows normal protobuf practices (do not reuse field numbers; optional/new fields are additive when consumers ignore unknown fields).

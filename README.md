@@ -6,6 +6,10 @@ This repository publishes the **MITF wallet** technical documentation with [MkDo
 
 ## Build locally
 
+**Bootstrap (recommended):** from repo root run `.\scripts\bootstrap-dev.ps1` (Windows) or `./scripts/bootstrap-dev.sh` (macOS/Linux), activate the `.venv` it creates, then `mkdocs serve`.
+
+Or manually:
+
 ```bash
 python -m venv .venv
 .\.venv\Scripts\activate   # Windows
@@ -14,7 +18,7 @@ pip install -r requirements.txt
 mkdocs serve
 ```
 
-Open [http://127.0.0.1:8000/](http://127.0.0.1:8000/) to preview.
+Open [http://127.0.0.1:8000/](http://127.0.0.1:8000/) to preview. More detail: [Local development setup](docs/getting-started/local-development.md).
 
 ## Deploy
 
