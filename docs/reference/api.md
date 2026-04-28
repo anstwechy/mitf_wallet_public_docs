@@ -8,6 +8,28 @@
 - **Domain events:** [Domain events](../architecture/events.md) — RabbitMQ events published by the system.
 - **Logging (operations):** [Logging](../operations/logging.md) — structured logging, correlation ID, configuration, and runbook.
 
+## API versioning
+
+This section is the **explicit contract** for how integration surfaces evolve. Align runtime behavior with the **deployed service version** and with **release notes** ([Changelog & releases](../changelog.md)).
+
+### REST (ASP.NET services)
+
+- **Path versioning:** The REST paths documented here (for example `/onboarding/accounts`, `/health`, webhook routes) are the **current** surface. They do **not** embed a `/v1` segment unless Masarat introduces URL versioning in a future release; if that happens, new paths or prefixes will be documented here and called out in release notes.
+- **OpenAPI document version:** In Development, services expose a JSON OpenAPI description at **`/openapi/v1.json`**. The `v1` segment labels the **exported spec revision** consumers can download or diff — not every individual route is required to repeat that segment in the URL.
+- **Integrator expectation:** Treat **additive** changes (new optional fields, new endpoints) as backward compatible unless release notes say otherwise. Treat **removed fields, renamed properties, new required fields, changed status codes, or semantic changes** as **breaking** — require a coordinated client and server upgrade.
+- **Headers and auth:** Changes to required headers (for example `X-Api-Key`, `Authorization`, `x-bank-id`, `Idempotency-Key`) or to JWT claims are **contract changes** and should appear in release notes.
+
+### gRPC
+
+- **Contract:** `.proto` definitions and generated stubs define the RPC and message shapes. **Wire compatibility** follows normal protobuf practices (do not reuse field numbers; optional/new fields are additive when consumers ignore unknown fields).
+- **Deployment:** Clients should target the **same major deployment** as the server for behavior guarantees. Breaking RPC or message changes must be documented in release notes and may require dual-run or migration steps from ops.
+
+### Documentation vs binaries
+
+- **This site** ([mitf_wallet_public_docs](https://github.com/anstwechy/mitf_wallet_public_docs)) tracks the **intended** integration contract as maintained by Masarat. If production lags the docs (or vice versa), the **running service** and your **internal release notes** win until the docs are updated.
+
+---
+
 ## Typical call: Customer Gateway → core services
 
 ```mermaid

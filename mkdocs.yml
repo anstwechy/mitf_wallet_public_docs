@@ -35,8 +35,10 @@ nav:
       - "Risk, compliance & finance": stakeholders/risk-compliance-and-finance.md
       - "Operations & technology": stakeholders/operations-and-technology.md
   - Getting started:
+      - "5-minute quickstart": getting-started/quickstart.md
       - Welcome & guided tours: getting-started/welcome.md
       - Full A–Z index: getting-started/all-pages.md
+  - "Changelog & releases": changelog.md
   - Architecture:
       - Platform capabilities: architecture/platform-capabilities.md
       - Domain events: architecture/events.md

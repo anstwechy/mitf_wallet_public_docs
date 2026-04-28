@@ -17,9 +17,11 @@ Use the **sidebar** for the recommended order. This page is a **flat lookup** by
 
 | Page | Description |
 | ---- | ----------- |
+| [5-minute quickstart](../getting-started/quickstart.md) | Curl + auth onboarding for new integrators |
 | [AML bridge — tenant resolution](../integrations/aml-bridge-tenant-resolution.md) | How `BankId` is resolved for FlowGuard routing |
 | [AML integration (overview)](../integrations/aml-integration.md) | Wallet → FlowGuard bridge components and config |
 | [API reference](../reference/api.md) | REST/gRPC usage, grpcurl, auth, health |
+| [Changelog & releases](../changelog.md) | Release notes links and integration change tracking |
 | [Configuration reference](../reference/configuration-reference.md) | Cross-service configuration and env vars |
 | [Customer Gateway (service ref)](../reference/service-reference/Masarat.Gateway.Customer.Api.reference.md) | Gateway host settings |
 | [Domain events](../architecture/events.md) | RabbitMQ event contracts |
