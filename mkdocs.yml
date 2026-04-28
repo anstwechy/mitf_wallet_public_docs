@@ -40,6 +40,7 @@ nav:
   - Architecture:
       - Platform capabilities: architecture/platform-capabilities.md
       - Domain events: architecture/events.md
+      - Money movement (sequence diagrams): architecture/money-movement-sequence-diagrams.md
       - Transaction flows & ledger examples: architecture/transaction-flows-and-ledger-examples.md
       - Transfer backpressure (client contract): architecture/transfer-backpressure-client-contract.md
       - Outbox & ledger consistency: architecture/outbox-and-ledger-consistency.md

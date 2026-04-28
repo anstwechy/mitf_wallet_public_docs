@@ -30,6 +30,7 @@ Use the **sidebar** for the recommended order. This page is a **flat lookup** by
 | [KYC API (service ref)](../reference/service-reference/Masarat.Kyc.Api.reference.md) | KYC host reference |
 | [Ledger API (service ref)](../reference/service-reference/Masarat.Ledger.Api.reference.md) | Ledger host reference |
 | [LoadTest job (service ref)](../reference/service-reference/Masarat.LoadTest.Job.reference.md) | Load test worker reference |
+| [Money movement — sequence diagrams](../architecture/money-movement-sequence-diagrams.md) | One sequence diagram per wallet financial journey (aligned with main repo README) |
 | [Load test reference runs](../load-testing/load-test-reference-runs.md) | Recorded scenarios, metrics, comparisons |
 | [Load testing operations](../operations/load-testing-operations.md) | How to run overlays and read diagnostics |
 | [Logging](../operations/logging.md) | Structured logs, correlation, Loki/OTLP |
