@@ -109,8 +109,14 @@
   }
 }
 
-.md-header,
-.md-main,
+/*
+ * Background mesh is z-index 0 on .md-container::before (pointer-events: none).
+ * Do not set .md-header or .md-main here: giving them the same z-index lets
+ * .md-main (later in the DOM) paint over the sticky header and steals taps, so
+ * the mobile menu / drawer stops working. Material already uses z-index: 4 on
+ * .md-header — leave that intact (avoid position: relative here; it would
+ * override the theme’s position: sticky).
+ */
 .md-dialog,
 .md-top {
   position: relative;
