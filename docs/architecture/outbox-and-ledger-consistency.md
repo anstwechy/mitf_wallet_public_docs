@@ -29,13 +29,13 @@ sequenceDiagram
   participant C
 
   App->>DB: "BEGIN; business rows + outbox rows"
-  App->>DB: COMMIT
-  OB->>DB: Read undispatched outbox
-  OB->>Q: Publish message
-  OB->>DB: Mark dispatched
+  App->>DB: "COMMIT"
+  OB->>DB: "Read undispatched outbox"
+  OB->>Q: "Publish message"
+  OB->>DB: "Mark dispatched"
   Q->>C: "Deliver (at-least-once)"
-  C->>C: Inbox + domain idempotency
-  C->>DB: Apply side-effects once
+  C->>C: "Inbox + domain idempotency"
+  C->>DB: "Apply side-effects once"
 ```
 
 > **Lifelines:** **App** = service handler, **DB** = PostgreSQL, **OB** = outbox dispatcher, **Q** = broker (e.g. RabbitMQ), **C** = consumer.
