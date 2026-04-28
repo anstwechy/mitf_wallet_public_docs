@@ -28,7 +28,8 @@ sequenceDiagram
   participant Q as RabbitMQ
   participant C as Consumer
 
-  App->>DB: BEGIN; business rows + outbox rows
+  %% Quote labels that contain ';' — otherwise Mermaid ends the statement early and the diagram breaks.
+  App->>DB: "BEGIN; business rows + outbox rows"
   App->>DB: COMMIT
   OB->>DB: Read undispatched outbox
   OB->>Q: Publish message
