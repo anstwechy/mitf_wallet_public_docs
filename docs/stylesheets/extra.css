@@ -285,6 +285,17 @@
   }
 }
 
+/* H1 + .wallet-lead / .flow-lead: gradient “invisible text” inside tinted hero boxes */
+.md-typeset h1.wallet-lead,
+.md-typeset h1.flow-lead {
+  background: none;
+  -webkit-background-clip: unset;
+  background-clip: unset;
+  -webkit-text-fill-color: var(--md-default-fg-color);
+  color: var(--md-default-fg-color);
+  filter: none;
+}
+
 .md-typeset h1::after {
   content: "";
   display: block;
