@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block announce %}
+  <p>
+    <strong>What&rsquo;s new:</strong>
+    See <a href="{{ 'changelog/' | url }}">Changelog &amp; releases</a>.
+    Subscribe to updates:
+    <a href="{{ 'feed_rss_updated.xml' | url }}">RSS (updated)</a>
+    &middot;
+    <a href="{{ 'feed_json_updated.json' | url }}">JSON Feed</a>.
+  </p>
+{% endblock %}

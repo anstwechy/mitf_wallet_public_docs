@@ -71,6 +71,8 @@ flowchart TB
 | [**reconciliation/**](reconciliation/reconciliation.md) | Finance narrative + reconciliation job |
 | [**load-testing/**](load-testing/load-test-reference-runs.md) | Reference runs + stakeholder summary |
 | [**integrations/**](integrations/aml-integration.md) | AML bridge, FlowGuard plan, tenant resolution |
+| [**compliance/**](compliance/offline-packs.md) | Offline packs (print / PDF) for security & reconciliation chapters |
+| [**accessibility**](accessibility.md) | Keyboard use, contrast, motion, how to report gaps |
 
 !!! note "Different from FlowGuard AML docs"
     This site uses a **teal / emerald** theme and coral accents so it is visually distinct from the purple FlowGuard documentation set.

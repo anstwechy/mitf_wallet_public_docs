@@ -5,6 +5,7 @@ Use this page to track **documentation** and **integration-facing** changes over
 ## This documentation site
 
 - **[GitHub Releases — mitf_wallet_public_docs](https://github.com/anstwechy/mitf_wallet_public_docs/releases)** — release notes and tags for this repo (MkDocs content, nav, and reference updates).
+- **Syndication (returning visitors):** after each deploy, feeds are published at the site root — open **`/feed_rss_updated.xml`** or **`/feed_json_updated.json`** from the same host as the docs (also linked in the site banner). Use them in Slack, your intranet, or reader apps to watch documentation changes.
 - **Source:** [Repository on GitHub](https://github.com/anstwechy/mitf_wallet_public_docs); each release should summarize what integrators and operators need to re-read (API tables, security, operations).
 
 !!! note "Platform and API binaries"

@@ -18,6 +18,7 @@ Use the **sidebar** for the recommended order. This page is a **flat lookup** by
 | Page | Description |
 | ---- | ----------- |
 | [5-minute quickstart](../getting-started/quickstart.md) | Curl + auth onboarding for new integrators |
+| [Accessibility](../accessibility.md) | Keyboard use, contrast, motion, reporting gaps |
 | [AML bridge — tenant resolution](../integrations/aml-bridge-tenant-resolution.md) | How `BankId` is resolved for FlowGuard routing |
 | [AML integration (overview)](../integrations/aml-integration.md) | Wallet → FlowGuard bridge components and config |
 | [API reference](../reference/api.md) | REST/gRPC usage, grpcurl, auth, health |
@@ -32,11 +33,13 @@ Use the **sidebar** for the recommended order. This page is a **flat lookup** by
 | [KYC API (service ref)](../reference/service-reference/Masarat.Kyc.Api.reference.md) | KYC host reference |
 | [Ledger API (service ref)](../reference/service-reference/Masarat.Ledger.Api.reference.md) | Ledger host reference |
 | [LoadTest job (service ref)](../reference/service-reference/Masarat.LoadTest.Job.reference.md) | Load test worker reference |
-| [Money movement — sequence diagrams](../architecture/money-movement-sequence-diagrams.md) | One sequence diagram per wallet financial journey (aligned with main repo README) |
 | [Load test reference runs](../load-testing/load-test-reference-runs.md) | Recorded scenarios, metrics, comparisons |
 | [Load testing operations](../operations/load-testing-operations.md) | How to run overlays and read diagnostics |
 | [Logging](../operations/logging.md) | Structured logs, correlation, Loki/OTLP |
+| [Money movement — sequence diagrams](../architecture/money-movement-sequence-diagrams.md) | One sequence diagram per wallet financial journey (aligned with main repo README) |
+| [Offline packs (print / PDF)](../compliance/offline-packs.md) | Security & reconciliation chapters for offline audit binders |
 | [Onboarding channel hardening](../security/onboarding-channel-hardening.md) | Onboarding-specific security |
+| [OpenAPI in docs (advanced)](../reference/openapi-in-docs.md) | Roadmap for embedded Swagger/Redoc on GitHub Pages |
 | [Outbox and ledger consistency](../architecture/outbox-and-ledger-consistency.md) | Messaging durability, ledger ambiguity, recovery |
 | [Platform capabilities](../architecture/platform-capabilities.md) | Consistency, durability, security, observability |
 | [Production deployment](../operations/production-deployment.md) | Sizing, ports, secrets, pools, load |

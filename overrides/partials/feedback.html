@@ -1,0 +1,29 @@
+{#-
+  GitHub-issue feedback (no analytics provider required).
+  Closes the loop for integrators and auditors improving these docs.
+-#}
+{% if page.meta and page.meta.hide and "feedback" in page.meta.hide %}
+{% else %}
+{% set repo = config.extra.doc_feedback_repo | default(config.repo_url | replace("https://github.com/", "")) %}
+{% set issue_base = "https://github.com/" ~ repo ~ "/issues/new" %}
+{% set ptitle = page.meta.title if page.meta and page.meta.title else page.title %}
+{% set ptitle = ptitle | striptags %}
+{% set issue_title = ("Docs feedback: " ~ ptitle) | urlencode %}
+{% set canon = page.canonical_url | default(config.site_url ~ page.url) %}
+{% set issue_body = ("**Page:** " ~ canon ~ "\n\n**What we should fix or clarify:**\n\n") | urlencode %}
+{% set issue_href = issue_base ~ "?labels=documentation&title=" ~ issue_title ~ "&body=" ~ issue_body %}
+<aside class="doc-feedback md-typeset" aria-labelledby="doc-feedback-title">
+  <h2 id="doc-feedback-title" class="doc-feedback__heading">Was this page helpful?</h2>
+  <p class="doc-feedback__lede">
+    Your feedback helps auditors and integrators who rely on this site.
+    If something is outdated, unclear, or wrong, open a GitHub issue (we pre-fill the page link).
+  </p>
+  <div class="doc-feedback__actions">
+    <a href="#doc-feedback-thanks" class="md-button md-button--primary">Yes, this helped</a>
+    <a href="{{ issue_href }}" class="md-button" target="_blank" rel="noopener">Suggest an improvement</a>
+  </div>
+  <p id="doc-feedback-thanks" class="doc-feedback__thanks" tabindex="-1">
+    Thanks for the signal. If you still need a change tracked, use <strong>Suggest an improvement</strong>.
+  </p>
+</aside>
+{% endif %}

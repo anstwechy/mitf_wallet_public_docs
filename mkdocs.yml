@@ -49,6 +49,9 @@ nav:
   - Security:
       - System hardening: security/system-hardening.md
       - Onboarding channel hardening: security/onboarding-channel-hardening.md
+  - "Compliance & offline":
+      - "Offline packs (print / PDF)": compliance/offline-packs.md
+  - Accessibility: accessibility.md
   - Operations:
       - Production deployment: operations/production-deployment.md
       - Logging: operations/logging.md
@@ -66,6 +69,7 @@ nav:
       - Reference runs: load-testing/load-test-reference-runs.md
   - Reference:
       - API reference: reference/api.md
+      - "OpenAPI in docs (advanced)": reference/openapi-in-docs.md
       - gRPC services: reference/grpc-services.md
       - Configuration reference: reference/configuration-reference.md
       - Service reference:
@@ -115,7 +119,9 @@ theme:
     - search.highlight
     - search.share
     - content.code.copy
+    - content.code.select
     - content.action.edit
+    - announce.dismiss
     - content.tooltips
     - toc.follow
 
@@ -144,6 +150,8 @@ markdown_extensions:
       pygments_lang_class: true
 
 extra:
+  doc_version_label: "main"
+  doc_feedback_repo: anstwechy/mitf_wallet_public_docs
   masarat_logo_dark: assets/masarat-logo-dark.png
   generator: false
   site_description: |
@@ -160,4 +168,22 @@ extra_css:
 strict: false
 
 plugins:
+  # search first — recommended when using multiple plugins
   - search
+  # Last-updated line on each page (Material source-file partial). Plugin `strict: false`
+  # keeps "no git history yet" as INFO so CI `mkdocs build --strict` still passes.
+  - git-revision-date-localized:
+      strict: false
+      enable_creation_date: false
+      fallback_to_build_date: true
+      enable_git_follow: false
+      type: date
+      locale: en
+  - rss:
+      length: 30
+      use_git: true
+      use_material_blog: false
+      use_material_social_cards: false
+      feed_title: MITF Wallet documentation updates
+      feed_description: >-
+        Recent changes to MITF wallet technical documentation for integrators, operators, and auditors.

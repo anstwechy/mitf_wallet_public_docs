@@ -567,3 +567,81 @@
   border-color: var(--wallet-border);
   opacity: 0.85;
 }
+
+/* ----- Per-page metadata: version badge (see overrides/partials/source-file.html) ----- */
+.doc-version-badge {
+  font-weight: 600;
+  font-size: 0.8rem;
+  letter-spacing: 0.03em;
+}
+
+/* ----- Feedback widget (GitHub issues) ----- */
+.doc-feedback {
+  margin: 2.5rem 0 1rem;
+  padding: 1rem 1.15rem 1.15rem;
+  border-radius: 0.55rem;
+  border: 1px solid var(--wallet-border);
+  background: color-mix(in srgb, var(--md-code-bg-color) 35%, var(--md-default-bg-color) 65%);
+  box-shadow: 0 4px 22px -8px rgba(15, 23, 42, 0.12);
+}
+
+.doc-feedback__heading {
+  margin: 0 0 0.35rem;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--md-default-fg-color);
+  border: 0;
+  padding: 0;
+}
+
+.doc-feedback__lede {
+  margin: 0 0 0.85rem;
+  font-size: 0.82rem;
+  color: var(--md-default-fg-color--light);
+  line-height: 1.55;
+}
+
+.doc-feedback__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.doc-feedback__actions .md-button {
+  margin: 0;
+}
+
+.doc-feedback__thanks {
+  margin: 1rem 0 0;
+  font-size: 0.78rem;
+  color: var(--md-default-fg-color--lighter);
+  scroll-margin-top: 4rem;
+}
+
+[data-md-color-scheme="slate"] .doc-feedback {
+  box-shadow: 0 4px 26px -6px rgba(0, 0, 0, 0.35);
+}
+
+/* Clearer keyboard focus for links & buttons in main content */
+.md-typeset a:focus-visible,
+.doc-feedback__actions .md-button:focus-visible,
+.md-banner a:focus-visible {
+  outline: 2px solid var(--md-accent-bg-color);
+  outline-offset: 2px;
+}
+
+@media print {
+  .md-banner,
+  .doc-feedback,
+  .md-header,
+  .md-sidebar,
+  .md-search,
+  .md-footer > nav {
+    display: none !important;
+  }
+
+  .md-content {
+    animation: none;
+  }
+}
